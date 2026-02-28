@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce Website Design</title>
+    <link rel="stylesheet" href="../styles/style.css">
+</head>
+<body>
+<header class="sticky top-0 z-100 h-20 border-b border-gray-200 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16 md:h-20 gap-4">
+            <a class="flex items-center flex-shrink-0 gap-2" href="/">
+                <div class="flex items-center justify-center size-10 rounded-[10px] bg-[#F54900]">
+                    <span class="text-white font-bold text-xl ">BM</span>
+                </div>
+                <span class="hidden lg:block text-xl font-bold text-[#101828]">BuildMart</span>
+            </a>
+            <nav class="hidden md:flex items-center gap-8 ">
+                <a class="text-[#364153] hover:text-[#F54900] transition-colors" href="#">Product</a>
+                <a class="text-[#364153] hover:text-[#F54900] transition-colors" href="#">Categories</a>
+                <a class="text-[#364153] hover:text-[#F54900] transition-colors" href="#">Deals</a>
+                <a class="text-[#364153] hover:text-[#F54900] transition-colors" href="#">About</a>
+            </nav>
+            <div class="hidden md:flex flex-1 items-center max-w-md">
+                <div class="relative w-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-5 text-[#99A1AF] absolute left-3 top-1/2 -translate-y-1/2">
+                        <path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/>
+                    </svg>
+                    <input type="text" placeholder="Search products..." class="w-full pl-10 py-2 pr-4 border border-[#D1D5DC] rounded-[10px] focus:outline-none  focus:ring-2 focus:ring-[#F54900] focus:border-transparent">
+                </div>
+            </div>
+            <div class="flex items-center size-9 gap-3">
+                <button class="p-2 text-[#99A1AF] hover:text-[#F54900] transition-colors md:hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-5 ">
+                        <path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/>
+                    </svg>
+                </button>
+                <a class="relative p-2 text-[#99A1AF] hover:text-[#F54900] transition-colors" href="/cart">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-5 "><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/>
+                        <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/>
+                    </svg>
+                    <span class="absolute flex items-center justify-center -top-1 -right-1 bg-[#F54900] text-white text-xs size-5 rounded-full">
+                    1
+                    </span>
+                </a>
+                <button class="p-2 text-[#99A1AF] hover:text-[#F54900] transition-colors md:hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-5 "><path d="M4 5h16"/>
+                        <path d="M4 12h16"/><path d="M4 19h16"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+</body>
+</html>
