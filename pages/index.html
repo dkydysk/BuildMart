@@ -31,7 +31,7 @@
                         <input type="text" placeholder="Search products..." class="w-full pl-10 py-2 pr-4 border border-[#D1D5DC] rounded-[10px] focus:outline-none  focus:ring-2 focus:ring-[#F54900] focus:border-transparent">
                     </div>
                 </div>
-                <div class="flex items-center size-9 gap-3">
+                <div class="flex items-center flex-shrink-0 gap-3">
                     <button class="p-2 text-[#99A1AF] hover:text-[#F54900] transition-colors md:hidden">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-5 ">
                             <path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/>
@@ -54,9 +54,145 @@
             </div>
         </div>
     </header>
-    <main class="flex-1 ">
+    <main class="flex-1 bg-white text-[#4A5565]">
         <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-8">
-            Контент страницы
+            <div class="flex flex-col  gap-2 mb-8">
+                <h1 class="text-4xl font-bold text-[#101828]">
+                    Building Materials
+                </h1>
+                <p>
+                    Premium construction supplies for all your projects
+                </p>
+            </div>
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+                <div class="flex gap-2 items-center">
+                    <button class="flex items-center gap-2 px-4 py-2 text-black font-medium rounded-[10px] border border-[#D1D5DC]">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-black size-4"><path d="M10 5H3"/><path d="M12 19H3"/><path d="M14 3v4"/><path d="M16 17v4"/><path d="M21 12h-9"/><path d="M21 19h-5"/><path d="M21 5h-7"/>
+                            <path d="M8 10v4"/><path d="M8 12H3"/>
+                        </svg>
+                    Hide Filters
+                    </button>
+                    <p>Showing 6 products</p>
+                </div>
+                <div class="">
+                    <label class="text-sm font-medium">Sort by:</label>
+                    <select class="px-4 py-2 text-black rounded-[10px] border border-[#D1D5DC] focus:outline-none  focus:ring-2 focus:ring-[#F54900] focus:border-transparent">
+                        <option value="">Name (A-Z)</option>
+                        <option value="">Price (Low to High)</option>
+                        <option value="">Price (High to Low)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="bg-white p-6 border border-[#E5E7EB] rounded-[10px] mb-6">
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="flex flex-1 flex-col gap-3">
+                        <h3 class="text-black font-semibold text-lg">Minimum Rating</h3>
+                        <div class="flex flex-wrap gap-4" id="rating-container">
+                            <div class="flex items-center gap-2">
+                                <button id="rating-5" data-rating="5" data-state="unchecked" aria-checked="false"
+                                        class="size-4 flex items-center justify-center rounded-[4px] border border-[#E5E7EB] bg-[#F3F3F5]transition-all cursor-pointer data-[state=checked]:bg-black data-[state=checked]:border-black data-[state=checked]:text-white">
+                                    <span data-state="unchecked" class="hidden data-[state=checked]:flex items-center justify-center text-current">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="size-3.5">
+                                            <path d="M20 6 9 17l-5-5"></path>
+                                        </svg>
+                                    </span>
+                                </button>
+                                <label for="rating-5" class="cursor-pointer text-sm font-medium text-black">5+ Stars</label>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <button id="rating-4" data-rating="4" data-state="unchecked" aria-checked="false"
+                                        class="size-4 flex items-center justify-center rounded-[4px] border border-[#E5E7EB] bg-[#F3F3F5]transition-all cursor-pointer data-[state=checked]:bg-black data-[state=checked]:border-black data-[state=checked]:text-white">
+                                    <span data-state="unchecked" class="hidden data-[state=checked]:flex items-center justify-center text-current">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="size-3.5">
+                                            <path d="M20 6 9 17l-5-5"></path>
+                                        </svg>
+                                    </span>
+                                </button>
+                                <label for="rating-4" class="cursor-pointer text-sm font-medium text-black">4+ Stars</label>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <button id="rating-3" data-rating="3" data-state="unchecked" aria-checked="false"
+                                        class="size-4 flex items-center justify-center rounded-[4px] border border-[#E5E7EB] bg-[#F3F3F5]transition-all cursor-pointer data-[state=checked]:bg-black data-[state=checked]:border-black data-[state=checked]:text-white">
+                                    <span data-state="unchecked" class="hidden data-[state=checked]:flex items-center justify-center text-current">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="size-3.5">
+                                            <path d="M20 6 9 17l-5-5"></path>
+                                        </svg>
+                                    </span>
+                                </button>
+                                <label for="rating-3" class="cursor-pointer text-sm font-medium text-black">3+ Stars</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-1 flex-col gap-3">
+                        <h3 class="text-black text-lg font-semibold">
+                            Price Range
+                        </h3>
+                        <span>
+
+                        </span>
+                        <div>
+
+                        </div>
+                        <div class="">
+                        <span>
+
+                        </span>
+                        <span>
+
+                        </span>
+                    </div>
+                    </div>
+                    <div class="flex items-end">
+                        <button class="px-6 py-2 text-sm font-medium text-[#F54900] bg-white border border-[#F54900] hover:text-[#b53600] hover:border-[#b53600] rounded-lg transition">
+                            Clear All Filters
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="group bg-white border border-[#E5E7EB] rounded-lg overflow-hidden hover:shadow-lg transition">
+                    <a href="/product/5">
+                        <div class="aspect-square overflow-hidden bg-gray-100">
+                            <img src="https://i.pinimg.com/170x/8c/08/59/8c0859bfac2729c2ae207eb58b1f2875.jpg" alt="Exterior Paint Set" class="w-full h-full object-cover group-hover:scale-105 transition">
+                        </div>
+                    </a>
+                    <div class="flex flex-col gap-2 p-4">
+                        <a href="/product/5">
+                            <h3 class="text-[#101828] font-semibold text-lg group-hover:text-[#F54900] transition">Exterior Paint Set</h3>
+                        </a>
+                        <div class="flex items-center gap-0.5">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4 fill-[#FDC700] text-[#FDC700]">
+                                <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/>
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4 fill-[#FDC700] text-[#FDC700]">
+                                <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/>
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4 fill-[#FDC700] text-[#FDC700]">
+                                <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/>
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4 fill-[#FDC700] text-[#FDC700]">
+                                <path d="M12 18.338a2.1 2.1 0 0 0-.987.244L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.12 2.12 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.12 2.12 0 0 0 1.597-1.16l2.309-4.679A.53.53 0 0 1 12 2"/>
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4 text-[#D1D5DC]">
+                                <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/>
+                            </svg>
+                            <span class="ml-2 text-sm text-[#4A5565]">(3.5)</span>
+                        </div>
+                        <p class="text-2xl text-[#101828] font-bold">$45.99</p>
+                        <p class="text-sm text-[#6A7282]">Paint & Coatings</p>
+                        <button class="flex items-center justify-center gap-2 mt-2 w-full py-2 text-sm font-medium text-white bg-[#F54900] hover:bg-[#b53600]  rounded-lg transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4 "><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/>
+                                <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/>
+                            </svg>
+                            Add To Cart
+                        </button>
+                    </div>
+                </div>
+                <div class="text-center py-12">
+                    <p class="text-[#6A7282] text-lg">No products match your filters.</p>
+                    <button class="mt-4 text-[#F54900] hover:text-[#b53600] font-medium">Clear filters</button>
+                </div>
+            </div>
         </div>
     </main>
     <footer class="bg-[#101828] text-[#D1D5DC] mt-auto w-full">
@@ -126,7 +262,7 @@
                     <h3 class="text-white font-bold text-lg">Newsletter</h3>
                     <p class="text-sm">Subscribe for updates and exclusive deals.</p>
                     <div class="flex gap-2">
-                        <input type="email" placeholder="Your email" class="flex-1 px-3 py-2 bg-[#262e3b] border border-[#364153] rounded-[10px] focus:outline-none  focus:ring-2 focus:ring-[#F54900] focus:border-transparent">
+                        <input type="email" placeholder="Your email" class="flex-1 min-w-0 px-3 py-2 bg-[#262e3b] border border-[#364153] rounded-[10px] focus:outline-none  focus:ring-2 focus:ring-[#F54900] focus:border-transparent">
                         <button class="px-4 py-2 bg-[#F54900] hover:bg-[#b53600] text-white rounded-lg transition">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4">
                                 <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/>
@@ -137,15 +273,15 @@
             </div>
             <div class="pt-8 border-t border-[#364153]">
                 <div class="grid grid-cols-1 md:grid-cols-3">
-                    <div>
+                    <div class="flex flex-col gap-1">
                         <p class="text-white font-semibold text-sm">Phone</p>
                         <p class="text-sm">1-800-BUILD-MART</p>
                     </div>
-                    <div>
+                    <div class="flex flex-col gap-1">
                         <p class="text-white font-semibold text-sm">Email</p>
                         <p class="text-sm">support@buildmart.com</p>
                     </div>
-                    <div>
+                    <div class="flex flex-col gap-1">
                         <p class="text-white font-semibold text-sm">Address</p>
                         <p class="text-sm">123 Construction Ave, Builder City, BC 12345</p>
                     </div>
@@ -157,5 +293,6 @@
         </div>
     </footer>
 </div>
+<script src="../scripts/script.js"></script>
 </body>
 </html>
