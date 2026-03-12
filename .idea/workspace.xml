@@ -5,6 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2d90d814-5cda-41e3-a0c5-e56449dcb9a4" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/images/bricks.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/cement.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/i-beams.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/paint.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/planks.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/plywood.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/about.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/cart.html" afterDir="false" />
@@ -61,6 +67,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\рабочий стол\BuildMartProject\BuildMart\images" />
       <recent name="F:\рабочий стол\BuildMartProject\BuildMart\pages" />
       <recent name="F:\рабочий стол\BuildMartProject\BuildMart\styles" />
       <recent name="F:\рабочий стол\BuildMartProject\BuildMart\html" />
@@ -90,6 +97,7 @@
       <workItem from="1772500854168" duration="16278000" />
       <workItem from="1772950587527" duration="4338000" />
       <workItem from="1773298346665" duration="7783000" />
+      <workItem from="1773316811092" duration="3554000" />
     </task>
     <servers />
   </component>
