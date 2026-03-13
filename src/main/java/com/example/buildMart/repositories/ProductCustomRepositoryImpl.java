@@ -29,7 +29,7 @@ public class ProductCustomRepositoryImpl implements ProductCustomRepository {
     @Override
     public List<Product> findByCategory(String category){
         Query query = new Query();
-        query.addCriteria(Criteria.where("categories").is(category));
+        query.addCriteria(Criteria.where("category").is(category));
         return mongoTemplate.find(query, Product.class);
     };
     @Override

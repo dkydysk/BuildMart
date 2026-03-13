@@ -27,13 +27,13 @@ public class ProductController {
         return  productService.findById(id);
     }
 
-    @GetMapping("/category")
-    public List<Product> findByCategory(@RequestParam String category){
+    @GetMapping("/category/{category}")
+    public List<Product> findByCategory(@PathVariable String category){
         return productService.findByCategory(category);
     }
 
     @GetMapping("/params")
-    public List<Product> findByPrice(@RequestParam(required = false) Float rating, @RequestParam Float minPrice, @RequestParam Float maxPrice, @RequestParam Integer page, @RequestParam Integer size){
+    public List<Product> findByParams(@RequestParam(required = false) Float rating, @RequestParam Float minPrice, @RequestParam Float maxPrice, @RequestParam Integer page, @RequestParam Integer size){
         return productService.findByParams(rating ,minPrice, maxPrice, page, size);
     }
 }

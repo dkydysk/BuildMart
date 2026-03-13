@@ -11,7 +11,7 @@ public class Product {
     @Id
     private String id;
     private String name;
-    private List<String> categories;
+    private String category;
     private List<String> images;
     private Float rating;
     private Float price;
@@ -20,13 +20,12 @@ public class Product {
     private Map<String,String> technicalSpecifications;
     private List<Integer> relatedProducts;
 
-    public Product() {
-    }
+    public Product() {}
 
-    public Product(String id, String name, List<String> categories, List<String> images, Float rating, Float price, Float discount, String description, Map<String, String> technicalSpecifications, List<Integer> relatedProducts) {
+    public Product(String id, String name, String category, List<String> images, Float rating, Float price, Float discount, String description, Map<String, String> technicalSpecifications, List<Integer> relatedProducts) {
         this.id = id;
         this.name = name;
-        this.categories = categories;
+        this.category = category;
         this.images = images;
         this.rating = rating;
         this.price = price;
@@ -60,12 +59,12 @@ public class Product {
         this.name = name;
     }
 
-    public List<String> getCategories() {
-        return categories;
+    public String getCategory() {
+        return category;
     }
 
-    public void setCategories(List<String> categories) {
-        this.categories = categories;
+    public void setCategories(String category) {
+        this.category = category;
     }
 
     public Float getRating() {
