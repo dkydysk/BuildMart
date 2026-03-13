@@ -1,8 +1,7 @@
-package com.example.buildMart.repositories;
+package com.example.buildMart.repositories.interfaces;
 
 import com.example.buildMart.models.Product;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
+import com.example.buildMart.repositories.interfaces.ProductCustomRepository;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

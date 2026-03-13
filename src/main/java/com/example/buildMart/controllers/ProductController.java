@@ -1,11 +1,8 @@
 package com.example.buildMart.controllers;
 
 import com.example.buildMart.models.Product;
-import com.example.buildMart.repositories.ProductCustomRepository;
-import com.example.buildMart.repositories.ProductRepository;
 import com.example.buildMart.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,8 +18,8 @@ public class ProductController {
     }
 
     @GetMapping("/")
-    public List<Product> findAll(){
-        return productService.findAll();
+    public List<Product> findAllByPage(@RequestParam(required = false) Integer page, @RequestParam(required = false) Integer size){
+        return productService.findAllByPage(page, size);
     }
 
     @GetMapping("/id/{id}")
@@ -36,7 +33,7 @@ public class ProductController {
     }
 
     @GetMapping("/params")
-    public List<Product> findByPrice(@RequestParam(required = false) Float rating, @RequestParam(required = false) Float minPrice, @RequestParam(required = false) Float maxPrice){
-        return productService.findByParams(rating ,minPrice, maxPrice);
+    public List<Product> findByPrice(@RequestParam(required = false) Float rating, @RequestParam Float minPrice, @RequestParam Float maxPrice, @RequestParam Integer page, @RequestParam Integer size){
+        return productService.findByParams(rating ,minPrice, maxPrice, page, size);
     }
 }
