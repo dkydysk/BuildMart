@@ -1,0 +1,118 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Exterior Paint Set",
+      "rating": 3.5,
+      "price": 45.99,
+      "discount": 20,
+      "category": "Paint & Coatings",
+      "description": "Professional-grade exterior paint set designed to withstand harsh weather conditions. This premium paint offers excellent coverage, durability, and color retention. Perfect for residential and commercial exterior surfaces.",
+      "technicalSpecifications": {
+        "Volume": "5 gallons total",
+        "Type": "100% Acrylic Latex",
+        "Coverage": "400 sq ft per gallon",
+        "Finish": "Satin",
+        "Dry Time": "2-4 hours",
+        "Colors": "Assorted neutral tones"
+      },
+      "image": "../images/paint.jpg",
+      "relatedProducts": []
+    },
+    {
+      "id": 2,
+      "name": "Plywood Sheets",
+      "rating": 4.5,
+      "price": 52.99,
+      "discount": 0,
+      "category": "Wood & Lumber",
+      "description": "Versatile construction-grade plywood sheets suitable for a wide range of applications. These sheets are engineered for strength and dimensional stability, perfect for subfloors, roofing, walls, and general construction.",
+      "technicalSpecifications": {
+        "Dimensions": "4' x 8'",
+        "Thickness": "3/4 inch",
+        "Grade": "CDX",
+        "Plies": "7-ply construction",
+        "Exposure": "Exterior grade",
+        "Veneer": "Softwood"
+      },
+      "image": "../images/plywood.jpg",
+      "relatedProducts": [4]
+    },
+    {
+      "id": 3,
+      "name": "Premium Cement Bags",
+      "rating": 5.0,
+      "price": 24.99,
+      "discount": 20,
+      "category": "Cement & Concrete",
+      "description": "High-quality Portland cement bags designed for heavy-duty construction projects. Our premium cement offers exceptional strength, durability, and workability. Ideal for foundations, structural work, and general concrete applications. Each bag contains precisely measured and tested cement that meets international quality standards.",
+      "technicalSpecifications": {
+        "Weight": "50 lbs per bag",
+        "Type": "Portland Cement Type I/II",
+        "Compressive Strength": "3500 PSI at 28 days",
+        "Setting Time": "2-4 hours initial set",
+        "Coverage": "Approximately 0.45 cubic feet",
+        "Storage Life": "6 months in sealed bag"
+      },
+      "image": "../images/cement.jpg",
+      "relatedProducts": []
+    },
+    {
+      "id": 4,
+      "name": "Premium Lumber Planks",
+      "rating": 4.5,
+      "price": 89.99,
+      "discount": 20,
+      "category": "Wood & Lumber",
+      "description": "Premium kiln-dried lumber planks perfect for all your woodworking and construction needs. These high-grade wooden planks are carefully selected for strength and appearance. Suitable for framing, decking, furniture making, and various carpentry projects.",
+      "technicalSpecifications": {
+        "Dimensions": "2\" x 6\" x 8'",
+        "Wood Type": "Douglas Fir",
+        "Grade": "Premium Select",
+        "Moisture Content": "15% kiln-dried",
+        "Treatment": "Pressure-treated option available",
+        "Quantity": "Sold individually"
+      },
+      "image": "../images/planks.jpg",
+      "relatedProducts": [2]
+    },
+    {
+      "id": 5,
+      "name": "Red Clay Bricks",
+      "rating": 4.0,
+      "price": 0.89,
+      "discount": 0,
+      "category": "Bricks & Blocks",
+      "description": "Traditional red clay bricks manufactured to the highest standards. These durable bricks are perfect for walls, patios, pathways, and architectural features. Fire-hardened for exceptional strength and weather resistance.",
+      "technicalSpecifications": {
+        "Dimensions": "8\" x 4\" x 2.25\"",
+        "Material": "Fire-hardened clay",
+        "Compressive Strength": "3000+ PSI",
+        "Water Absorption": "Less than 8%",
+        "Color": "Classic red",
+        "Weight": "4.5 lbs per brick"
+      },
+      "image": "../images/bricks.jpg",
+      "relatedProducts": []
+    },
+    {
+      "id": 6,
+      "name": "Steel I-Beams",
+      "rating": 5.0,
+      "price": 349.99,
+      "discount": 20,
+      "category": "Steel & Metal",
+      "description": "Heavy-duty structural steel I-beams engineered for maximum load-bearing capacity. These professional-grade beams are essential for large construction projects, building frames, and structural support applications.",
+      "technicalSpecifications": {
+        "Length": "20 feet",
+        "Profile": "W10x49",
+        "Material": "ASTM A992 Grade 50 Steel",
+        "Weight": "980 lbs",
+        "Yield Strength": "50 ksi",
+        "Finish": "Mill finish"
+      },
+      "image": "../images/i-beams.jpg",
+      "relatedProducts": []
+    }
+  ]
+}

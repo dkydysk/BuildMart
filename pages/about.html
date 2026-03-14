@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce Website Design</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="min-h-screen flex flex-col">
+    <header class="sticky top-0 z-100  border-b border-[#E5E7EB] bg-white">
+        <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 md:h-20 gap-4">
+                <a class="flex items-center flex-shrink-0 gap-2" href="../pages/index.html">
+                    <div class="flex items-center justify-center size-10 rounded-[10px] bg-[#F54900]">
+                        <span class="text-white font-bold text-xl ">BM</span>
+                    </div>
+                    <span class="hidden lg:block text-xl font-bold text-[#101828]">BuildMart</span>
+                </a>
+                <nav class="hidden md:flex items-center gap-8 ">
+                    <a class="text-[#364153] hover:text-[#F54900] transition-colors" href="../pages/index.html">Products</a>
+                    <a class="text-[#364153] hover:text-[#F54900] transition-colors" href="../pages/categories.html">Categories</a>
+                    <a class="text-[#364153] hover:text-[#F54900] transition-colors" href="../pages/deals.html">Deals</a>
+                    <a class="text-[#364153] hover:text-[#F54900] transition-colors" href="../pages/about.html">About</a>
+                </nav>
+                <div class="hidden md:flex flex-1 items-center max-w-md">
+                    <div class="relative w-full">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-5 text-[#99A1AF] absolute left-3 top-1/2 -translate-y-1/2">
+                            <path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/>
+                        </svg>
+                        <input type="text" placeholder="Search products..." class="w-full pl-10 py-2 pr-4 border border-[#D1D5DC] rounded-[10px] focus:outline-none  focus:ring-2 focus:ring-[#F54900] focus:border-transparent">
+                    </div>
+                </div>
+                <div class="flex items-center flex-shrink-0 gap-3">
+                    <button class="p-2 text-[#99A1AF] hover:text-[#F54900] transition-colors md:hidden">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-5 ">
+                            <path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/>
+                        </svg>
+                    </button>
+                    <a class="relative p-2 text-[#99A1AF] hover:text-[#F54900] transition-colors" href="../pages/cart.html">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-5 "><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/>
+                            <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/>
+                        </svg>
+                        <span class="absolute flex items-center justify-center -top-1 -right-1 bg-[#F54900] text-white text-xs size-5 rounded-full">
+                    1
+                    </span>
+                    </a>
+                    <button class="p-2 text-[#99A1AF] hover:text-[#F54900] transition-colors md:hidden">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-5 "><path d="M4 5h16"/>
+                            <path d="M4 12h16"/><path d="M4 19h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="flex-1 bg-white text-[#4A5565]">
+        <div class="min-h-screen max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-8">
+            <div class="flex flex-col gap-4 items-center mb-12">
+                <h1 class="text-4xl font-bold text-[#101828]">About BuildMart</h1>
+                <p class="text-lg max-w-3xl mx-auto">Your trusted destination for high‑quality construction materials and reliable building supplies</p>
+            </div>
+            <div class="flex flex-col gap-4 bg-white p-8 border border-[#E5E7EB] rounded-[10px] mb-12">
+                <h2 class="text-black font-bold text-xl">Our Story</h2>
+                <p>Founded in 2020, BuildMart has grown into a dependable name in the construction materials market. We’re committed to providing durable, professional‑grade products for builders, contractors, and homeowners.</p>
+                <p>Our mission is simple: deliver top‑tier materials, excellent customer service, and a smooth, hassle‑free shopping experience. Whether you're working on a major construction project or a small home renovation, we help you find exactly what you need.</p>
+                <p>With a carefully curated selection of premium materials — from lumber and cement to steel and masonry — every product in our catalog meets strict standards for strength, durability, and performance.</p>
+            </div>
+            <div class="mb-12">
+                <h2 class="mb-6 text-center text-black font-bold text-xl">Our Values</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="flex flex-col gap-2 items-center rounded-lg border border-[#E5E7EB] bg-white p-6">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-[#F54900]">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white size-8"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/>
+                                <path d="m9 12 2 2 4-4"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-black font-bold text-lg">Quality First</h3>
+                        <p class="text-center text-sm">We stock only reliable, industry‑approved materials that meet professional construction standards.</p>
+                    </div>
+                    <div class="flex flex-col gap-2 items-center rounded-lg border border-[#E5E7EB] bg-white p-6">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-[#F54900]">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white size-8"><circle cx="12" cy="12" r="10"/>
+                                <path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" x2="9.01" y1="9" y2="9"/><line x1="15" x2="15.01" y1="9" y2="9"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-black font-bold text-lg">Customer Satisfaction</h3>
+                        <p class="text-center text-sm">Your happiness is our priority. We're committed to providing exceptional service at every step.</p>
+                    </div>
+                    <div class="flex flex-col gap-2 items-center rounded-lg border border-[#E5E7EB] bg-white p-6">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-[#F54900]">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white size-8">
+                                <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-black font-bold text-lg">Fast & Reliable</h3>
+                        <p class="text-center text-sm">Quick shipping, easy returns, and responsive support - we're here when you need us.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col gap-6 bg-white p-8 border border-[#E5E7EB] rounded-[10px]">
+                <h2 class="text-black font-bold text-xl">Get in Touch</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="flex items-start gap-3">
+                        <div class="flex items-center justify-center h-10 w-10 rounded-full bg-orange-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#F54900] size-5">
+                                <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-black text-lg font-semibold mb-1">Email Us</h3>
+                            <p class="text-sm">support@buildmart.com</p>
+                            <p class="text-sm">sales@buildmart.com</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div class="flex items-center justify-center h-10 w-10 rounded-full bg-orange-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#F54900] size-5">
+                                <path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-black text-lg font-semibold mb-1">Call Us</h3>
+                            <p class="text-sm">1-800-BUILD-MART</p>
+                            <p class="text-sm">(1-800-832-4746)</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div class="flex items-center justify-center h-10 w-10 rounded-full bg-orange-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#F54900] size-5">
+                                <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-black text-lg font-semibold mb-1">Visit Us</h3>
+                            <p class="text-sm">123 Construction Ave</p>
+                            <p class="text-sm">Builder City, BC 12345</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div class="flex items-center justify-center h-10 w-10 rounded-full bg-orange-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#F54900] size-5"><circle cx="12" cy="12" r="10"/>
+                                <path d="M12 6v6l4 2"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-black text-lg font-semibold mb-1">Business Hours</h3>
+                            <p class="text-sm">Mon-Fri: 9AM - 6PM PST</p>
+                            <p class="text-sm">Sat-Sun: 10AM - 4PM PST</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="bg-[#101828] text-[#D1D5DC] mt-auto w-full">
+        <div class="flex flex-col max-w-7xl mx-auto  px-6 lg:px-8 py-12 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 ">
+                <div class="flex flex-col gap-4">
+                    <h3 class="text-white font-bold text-lg">BuildMart</h3>
+                    <p class="text-sm">Your trusted source for premium building materials and construction supplies since 1995.</p>
+                    <div class="flex gap-3">
+                        <a class="hover:text-[#F54900] transition" href="#">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-5">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                            </svg>
+                        </a>
+                        <a class="hover:text-[#F54900] transition" href="#">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-5">
+                                <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/>
+                            </svg>
+                        </a>
+                        <a class="hover:text-[#F54900] transition" href="#">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-5"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+                            </svg>
+                        </a>
+                        <a class="hover:text-[#F54900] transition" href="#">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-5">
+                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <h3 class="text-white font-bold text-lg">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="#" class="hover:text-[#F54900] transition text-sm">About Us</a>
+                        </li>
+                        <li>
+                            <a href="#" class="hover:text-[#F54900] transition text-sm">Products</a>
+                        </li>
+                        <li>
+                            <a href="#" class="hover:text-[#F54900] transition text-sm">Delivery Info</a>
+                        </li>
+                        <li>
+                            <a href="#" class="hover:text-[#F54900] transition text-sm">Returns Policy</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <h3 class="text-white font-bold text-lg">Customer Service</h3>
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="#" class="hover:text-[#F54900] transition text-sm">Contact Us</a>
+                        </li>
+                        <li>
+                            <a href="#" class="hover:text-[#F54900] transition text-sm">FAQs</a>
+                        </li>
+                        <li>
+                            <a href="#" class="hover:text-[#F54900] transition text-sm">Shipping & Tracking</a>
+                        </li>
+                        <li>
+                            <a href="#" class="hover:text-[#F54900] transition text-sm">Privacy Policy</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <h3 class="text-white font-bold text-lg">Newsletter</h3>
+                    <p class="text-sm">Subscribe for updates and exclusive deals.</p>
+                    <div class="flex gap-2">
+                        <input type="email" placeholder="Your email" class="flex-1 min-w-0 px-3 py-2 bg-[#262e3b] border border-[#364153] rounded-[10px] focus:outline-none  focus:ring-2 focus:ring-[#F54900] focus:border-transparent">
+                        <button class="px-4 py-2 bg-[#F54900] hover:bg-[#b53600] text-white rounded-lg transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4">
+                                <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-[#364153]">
+                <div class="grid grid-cols-1 md:grid-cols-3">
+                    <div class="flex flex-col gap-1">
+                        <p class="text-white font-semibold text-sm">Phone</p>
+                        <p class="text-sm">1-800-BUILD-MART</p>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <p class="text-white font-semibold text-sm">Email</p>
+                        <p class="text-sm">support@buildmart.com</p>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <p class="text-white font-semibold text-sm">Address</p>
+                        <p class="text-sm">123 Construction Ave, Builder City, BC 12345</p>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-[#364153] pt-8 text-sm text-center">
+                <p>© 2026 BuildMart. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</div>
+</body>
+</html>
