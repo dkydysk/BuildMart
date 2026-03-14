@@ -5,21 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2d90d814-5cda-41e3-a0c5-e56449dcb9a4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/data.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/categoriesPage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/data.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/dealsPage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/indexPage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/productPage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/utils.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/about.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/cart.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/categories.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/categories.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/deals.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/deals.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/product.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/product.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/script.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/input.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/input.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,7 +92,7 @@
       <workItem from="1772950587527" duration="4338000" />
       <workItem from="1773298346665" duration="7783000" />
       <workItem from="1773316811092" duration="20942000" />
-      <workItem from="1773474257104" duration="12077000" />
+      <workItem from="1773474257104" duration="16963000" />
     </task>
     <servers />
   </component>
