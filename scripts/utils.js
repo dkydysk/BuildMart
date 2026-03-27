@@ -1,7 +1,7 @@
 export function getProductIdFromUrl() {
-    const url = new URL(window.location.href);
-    const id = url.searchParams.get("id");
-    return id ? parseInt(id, 10) : null;
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = urlParams.get('id');
+    return productId;
 }
 
 

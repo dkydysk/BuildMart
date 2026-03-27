@@ -1,9 +1,9 @@
 package com.example.buildMart.repositories.interfaces;
 
 import com.example.buildMart.models.Product;
-import com.example.buildMart.repositories.interfaces.ProductCustomRepository;
+import com.example.buildMart.repositories.ProductCustomRepository;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProductRepository extends MongoRepository<Product, String>, ProductCustomRepository {}
+public interface ProductRepository extends MongoRepository<Product, String> {}

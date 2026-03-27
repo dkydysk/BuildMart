@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-commerce Website Design</title>
     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../styles_test/index.css">
 </head>
 <body>
 <div class="min-h-screen flex flex-col">
@@ -66,24 +67,30 @@
             </div>
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
                 <div class="flex gap-2 items-center">
-                    <button class="flex items-center gap-2 px-4 py-2 text-black font-medium rounded-[10px] border border-[#D1D5DC]">
+                    <button class="flex items-center gap-2 px-4 py-2 text-black font-medium rounded-[10px] border border-[#D1D5DC] hover:text-[#b53600] hover:border-[#b53600] transition" id="filters_button">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-black size-4"><path d="M10 5H3"/><path d="M12 19H3"/><path d="M14 3v4"/><path d="M16 17v4"/><path d="M21 12h-9"/><path d="M21 19h-5"/><path d="M21 5h-7"/>
                             <path d="M8 10v4"/><path d="M8 12H3"/>
                         </svg>
-                    Hide Filters
+                        <span id="filters_button_text">Show Filters</span>
                     </button>
-                    <p>Showing 6 products</p>
+                    <p>Showing
+                        <span id="shown-products">
+                            6
+                        </span>
+                        products
+                    </p>
                 </div>
                 <div class="">
                     <label class="text-sm font-medium">Sort by:</label>
-                    <select class="px-4 py-2 text-black rounded-[10px] border border-[#D1D5DC] focus:outline-none  focus:ring-2 focus:ring-[#F54900] focus:border-transparent">
-                        <option value="">Name (A-Z)</option>
-                        <option value="">Price (Low to High)</option>
-                        <option value="">Price (High to Low)</option>
+                    <select id="sort-selector" class="px-4 py-2 text-black rounded-[10px] border border-[#D1D5DC] focus:outline-none  focus:ring-2 focus:ring-[#F54900] focus:border-transparent">
+                        <option value="name_asc">Name (A-Z)</option>
+                        <option value="name_desc">Name (Z-A)</option>
+                        <option value="price_asc">Price (Low to High)</option>
+                        <option value="price_desc">Price (High to Low)</option>
                     </select>
                 </div>
             </div>
-            <div class="bg-white p-6 border border-[#E5E7EB] rounded-[10px] mb-6">
+            <div class="bg-white p-6 border border-[#E5E7EB] rounded-[10px] mb-6" id="filters_div" style="display:none">
                 <div class="flex flex-col md:flex-row gap-8">
                     <div class="flex flex-1 flex-col gap-3">
                         <h3 class="text-black font-semibold text-lg">Minimum Rating</h3>
@@ -127,35 +134,41 @@
                         <h3 class="text-black text-lg font-semibold">
                             Price Range
                         </h3>
-                        <span>
-
-                        </span>
-                        <div>
-
+                        <div class="slider-wrapper">
+                            <div class="slider-track"></div>
+                            <div class="slider-range" id="slider-range" style="left:0%; right:0%;"></div>
+                            <input type="range" id="min-price" class="slider-thumb slider-thumb-left" min="0" max="400" value="0" step="10">
+                            <input type="range" id="max-price" class="slider-thumb slider-thumb-right" min="0" max="400" value="400" step="10">
                         </div>
-                        <div class="">
-                        <span>
-
-                        </span>
-                        <span>
-
-                        </span>
-                    </div>
+                        <div class="flex justify-between text-sm">
+                            <span id="min-value">
+                                $
+                                0
+                            </span>
+                            <span id="max-value">
+                                $
+                                400
+                            </span>
+                        </div>
                     </div>
                     <div class="flex items-end">
-                        <button class="px-6 py-2 text-sm font-medium text-[#F54900] bg-white border border-[#F54900] hover:text-[#b53600] hover:border-[#b53600] rounded-lg transition">
+                        <button class="px-6 py-2 text-sm font-medium text-[#F54900] bg-white border border-[#F54900] hover:text-[#b53600] hover:border-[#b53600] rounded-lg transition" id="clear_filters_button">
                             Clear All Filters
                         </button>
                     </div>
                 </div>
             </div>
             <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-
                 <div class="text-center py-12">
                     <p class="text-[#6A7282] text-lg">No products match your filters.</p>
-                    <button class="mt-4 text-[#F54900] hover:text-[#b53600] font-medium">Clear filters</button>
+                    <button class="mt-4 text-[#F54900] hover:text-[#b53600] hover:border-[#b53600] font-medium transition" id="clear_filters_button_no_data">Clear filters</button>
                 </div>
             </div>
+        </div>
+        <div class="pagination-container">
+            <button id="prev-page" class="bg-[#F54900] hover:bg-[#b53600] transition" disabled>Previous</button>
+            <span id="page-info">Page 1</span>
+            <button id="next-page" class="bg-[#F54900] hover:bg-[#b53600] transition" disabled>Next</button>
         </div>
     </main>
     <footer class="bg-[#101828] text-[#D1D5DC] mt-auto w-full">
@@ -256,6 +269,6 @@
         </div>
     </footer>
 </div>
-<script type="module" src="../scripts/indexPage.js"></script>
+    <script type="module" src="../scripts/indexPage_test.js"></script>
 </body>
 </html>

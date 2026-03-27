@@ -12,21 +12,21 @@ public class Product {
     private String id;
     private String name;
     private String category;
-    private List<String> images;
-    private Float rating;
-    private Float price;
-    private Float discount;
+    private String image;
+    private Double rating;
+    private Double price;
+    private Double discount;
     private String description;
     private Map<String,String> technicalSpecifications;
-    private List<Integer> relatedProducts;
+    private List<String> relatedProducts;
 
     public Product() {}
 
-    public Product(String id, String name, String category, List<String> images, Float rating, Float price, Float discount, String description, Map<String, String> technicalSpecifications, List<Integer> relatedProducts) {
+    public Product(String id, String name, String category, String image, Double rating, Double price, Double discount, String description, Map<String, String> technicalSpecifications, List<String> relatedProducts) {
         this.id = id;
         this.name = name;
         this.category = category;
-        this.images = images;
+        this.image = image;
         this.rating = rating;
         this.price = price;
         this.discount = discount;
@@ -43,12 +43,12 @@ public class Product {
         this.id = id;
     }
 
-    public List<String> getImages() {
-        return images;
+    public String getImage() {
+        return image;
     }
 
-    public void setImages(List<String> images) {
-        this.images = images;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getName() {
@@ -67,27 +67,27 @@ public class Product {
         this.category = category;
     }
 
-    public Float getRating() {
+    public Double getRating() {
         return rating;
     }
 
-    public void setRating(Float rating) {
+    public void setRating(Double rating) {
         this.rating = rating;
     }
 
-    public Float getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Float price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
-    public Float getDiscount() {
+    public Double getDiscount() {
         return discount;
     }
 
-    public void setDiscount(Float discount) {
+    public void setDiscount(Double discount) {
         this.discount = discount;
     }
 
@@ -107,11 +107,11 @@ public class Product {
         this.technicalSpecifications = technicalSpecifications;
     }
 
-    public List<Integer> getRelatedProducts() {
+    public List<String> getRelatedProducts() {
         return relatedProducts;
     }
 
-    public void setRelatedProducts(List<Integer> relatedProducts) {
+    public void setRelatedProducts(List<String> relatedProducts) {
         this.relatedProducts = relatedProducts;
     }
 }

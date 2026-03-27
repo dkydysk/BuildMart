@@ -163,10 +163,11 @@ function renderProduct(product, allProducts) {
 
 async function initProductPage() {
     const products = await Data.loadProducts();
+    console.log(products);
     const id = Utils.getProductIdFromUrl();
-
-    const product = products.find(p => p.id === id);
-
+    console.log(id);
+    const product = products.find(p => p.id == id);
+    console.log(product);
     if (!product) {
         document.getElementById("product-page").innerHTML = `
             <div class="text-center">

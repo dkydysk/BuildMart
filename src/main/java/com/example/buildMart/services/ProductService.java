@@ -1,8 +1,10 @@
 package com.example.buildMart.services;
 
 import com.example.buildMart.models.Product;
+import com.example.buildMart.repositories.ProductCustomRepository;
 import com.example.buildMart.repositories.interfaces.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,20 +13,22 @@ import java.util.Optional;
 @Service
 public class ProductService {
     private final ProductRepository productRepository;
+    private final ProductCustomRepository productCustomRepository;
     @Autowired
-    public ProductService(ProductRepository productRepository){
+    public ProductService(ProductRepository productRepository, ProductCustomRepository productCustomRepository){
         this.productRepository = productRepository;
+        this.productCustomRepository = productCustomRepository;
     }
-    public List<Product> findAllByPage(Integer page, Integer size){
-        return productRepository.findAllByPage(page, size);
+    public Page<Product> findAllByPage(/*String sort,*/ Integer page, Integer size){
+        return productCustomRepository.findAllByPage(/*sort,*/ page, size);
     }
     public Optional<Product> findById(String id){
         return  productRepository.findById(id);
     }
-    public List<Product> findByCategory(String category){
-        return productRepository.findByCategory(category);
+    public List<Product> findAllByCategory(String category){
+        return productCustomRepository.findByCategory(category);
     }
-    public List<Product> findByParams(Float rating, Float minPrice, Float maxPrice, Integer page, Integer size){
-        return productRepository.findByParams(rating, minPrice, maxPrice, page, size);
+    public Page<Product> findAllByParams(Float rating, Float minPrice, Float maxPrice,  /*String sort,*/ Integer page, Integer size){
+        return productCustomRepository.findByParams(rating, minPrice, maxPrice,  /*sort,*/ page, size);
     }
 }
