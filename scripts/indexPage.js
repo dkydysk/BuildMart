@@ -2,32 +2,41 @@ import * as Data from "./data.js";
 import * as Utils from "./utils.js";
 import * as Api from "./../scripts_test/apiService.js";
 
+let DATA = null;
+let PRODUCTS = null;
+let CURRENT_SIZE = 4;
+let CURRENT_PAGE = 0;
+
 function renderProductCards(products) {
     const container = document.getElementById("products-grid");
     if (!container) return;
 
     container.innerHTML = "";
-
+    shownProducts.textContent = products.length;
     if (products.length === 0) {
         container.innerHTML = `
             <div class="text-center py-12">
                 <p class="text-[#6A7282] text-lg">No products match your filters.</p>
-                <button class="mt-4 text-[#F54900] hover:text-[#b53600] font-medium">Clear filters</button>
+                <button class="mt-4 text-[#F54900] hover:text-[#b53600] hover:border-[#b53600] font-medium transition" id="clear_filters_button_no_data">Clear filters</button>
             </div>
         `;
+        const clear_filters_button_no_data = document.getElementById("clear_filters_button_no_data");
+        clear_filters_button_no_data.addEventListener("click", function() {
+            clearFilters();
+        });
         return;
     }
 
     products.forEach(product => {
         container.innerHTML += `
             <div class="group bg-white border border-[#E5E7EB] rounded-lg overflow-hidden hover:shadow-lg transition">
-                <a href="../pages/product.html?id=${product.id}">
+                <a href="../product?id=${product.id}">
                     <div class="aspect-square overflow-hidden bg-gray-100">
                         <img src="${product.image}" class="w-full h-full object-cover group-hover:scale-105 transition">
                     </div>
                 </a>
                 <div class="p-4 flex flex-col gap-2">
-                    <a href="../pages/product.html?id=${product.id}">
+                    <a href="../product?id=${product.id}">
                         <h3 class="text-[#101828] font-semibold text-lg group-hover:text-[#F54900] transition">${product.name}</h3>
                     </a>
                     <div class="flex items-center gap-0.5">
@@ -48,10 +57,9 @@ function renderProductCards(products) {
 }
 
 async function initCatalogPage() {
-    const products = await Data.loadProducts();
-//    const data = await Api.getAll(1,6);
-//    const products = data.products;
-    renderProductCards(products);
+    await getAll(CURRENT_PAGE, CURRENT_SIZE);
+    sortProducts(sortSelector.value);
+    updatePagination();
 }
 
 initCatalogPage();
@@ -59,7 +67,7 @@ initCatalogPage();
 const buttons = document.querySelectorAll("#rating-container [data-rating]");
 
 buttons.forEach((btn) => {
-    btn.addEventListener("click", () => {
+    btn.addEventListener("click", async function() {
         const isChecked = btn.getAttribute("data-state") === "checked";
         buttons.forEach((b) => {
             b.setAttribute("data-state", "unchecked");
@@ -67,21 +75,28 @@ buttons.forEach((btn) => {
             const span = b.querySelector("span[data-state]");
             if (span) span.setAttribute("data-state", "unchecked");
         });
-        if (isChecked) return;
+        if (isChecked){
+            await getByParams(parseInt(minSlider.value), parseInt(maxSlider.value), null, CURRENT_PAGE, CURRENT_SIZE);
+            sortProducts(sortSelector.value);
+            updatePagination();
+            return;
+        }
         btn.setAttribute("data-state", "checked");
         btn.setAttribute("aria-checked", "true");
         const span = btn.querySelector("span[data-state]");
         if (span) span.setAttribute("data-state", "checked");
+        await getByParams(parseInt(minSlider.value), parseInt(maxSlider.value), btn.getAttribute("data-rating"), CURRENT_PAGE, CURRENT_SIZE);
+        sortProducts(sortSelector.value);
+        updatePagination();
     });
 });
 
 /* ---- filters ---- */
+const sortSelector = document.getElementById("sort-selector");
+const shownProducts = document.getElementById("shown-products");
 
-const filters_button_text = document.getElementById("filters_button_text");
-const filters_div = document.getElementById("filters_div");
-const filters_button = document.getElementById("filters_button");
-
-const clear_filters_button = document.getElementById("clear_filters_button");
+const prevBtn = document.getElementById("prev-page");
+const nextBtn = document.getElementById("next-page");
 
 const minSlider = document.getElementById('min-price');
 const maxSlider = document.getElementById('max-price');
@@ -91,7 +106,9 @@ const maxValueText = document.getElementById('max-value');
 const minValue = 0;
 const maxValue = 400;
 
-filters_button.addEventListener("click", function() {
+document.getElementById("filters_button").addEventListener("click", function() {
+    const filters_div = document.getElementById("filters_div");
+    const filters_button_text = document.getElementById("filters_button_text");
     if (filters_div.style.display === "none") {
         filters_button_text.textContent = "Hide Filters";
         filters_div.style.display = "block";
@@ -101,28 +118,22 @@ filters_button.addEventListener("click", function() {
     }
 });
 
-clear_filters_button.addEventListener("click", function() {
+document.getElementById("clear_filters_button").addEventListener("click", function() {
     clearFilters();
 });
 
-minSlider.addEventListener('input', e => {
+minSlider.addEventListener('input', async function(e) {
     updateSlider(e);
-    const rating = document.querySelector('[id^="rating-"][data-state="checked"]').getAttribute("data-rating");
-    const minPrice = parseInt(minSlider.value);
-    const maxPrice = parseInt(minSlider.value);
-//    const data = await Api.getByParams(minPrice, maxPrice, rating, 1, 6);
-//    const products = data.products;
-//    renderProductCards(products);
+    await getByParams(parseInt(minSlider.value), parseInt(maxSlider.value), (document.querySelector('[id^="rating-"][data-state="checked"]') ? document.querySelector('[id^="rating-"][data-state="checked"]').getAttribute("data-rating") : null), CURRENT_PAGE, CURRENT_SIZE);
+    sortProducts(sortSelector.value);
+    updatePagination();
 });
 
-maxSlider.addEventListener('input', e => {
+maxSlider.addEventListener('input', async function(e) {
     updateSlider(e);
-    const rating = document.querySelector('[id^="rating-"][data-state="checked"]').getAttribute("data-rating");
-    const minPrice = parseInt(minSlider.value);
-    const maxPrice = parseInt(minSlider.value);
-//    const data = await Api.getByParams(minPrice, maxPrice, rating, 1, 6);
-//    const products = data.products;
-//    renderProductCards(products);
+    await getByParams(parseInt(minSlider.value), parseInt(maxSlider.value), (document.querySelector('[id^="rating-"][data-state="checked"]') ? document.querySelector('[id^="rating-"][data-state="checked"]').getAttribute("data-rating") : null), CURRENT_PAGE, CURRENT_SIZE);
+    sortProducts(sortSelector.value);
+    updatePagination();
 });
 
 function updateSlider(e) {
@@ -165,3 +176,65 @@ function clearFilters(){
 
     initCatalogPage();
 }
+
+sortSelector.addEventListener("change", function() {
+    sortProducts(sortSelector.value);
+});
+
+async function getByParams(minPrice, maxPrice, rating, page, size){
+    DATA = await Api.getByParams(minPrice, maxPrice, rating, page, size);
+    console.log(DATA);
+    PRODUCTS = DATA.content;
+}
+
+async function getAll(page, size){
+    DATA = await Api.getAll(page, size);
+    PRODUCTS = DATA.content;
+}
+
+function sortProducts(sortValue){
+    switch(sortValue){
+        case "name_asc":
+            PRODUCTS.sort((a,b) => a.name.localeCompare(b.name));
+            break;
+        case "name_desc":
+            PRODUCTS.sort((a,b) => b.name.localeCompare(a.name));
+            break;
+        case "price_asc":
+            PRODUCTS.sort((a,b) => a.price - b.price);
+            break;
+        case "price_desc":
+            PRODUCTS.sort((a,b) => b.price - a.price);
+            break;
+        default:
+            break;
+    }
+    renderProductCards(PRODUCTS);
+}
+
+function updatePagination(){
+    const pageInfo = document.getElementById("page-info");
+    pageInfo.textContent = "Page " + (CURRENT_PAGE + 1);
+    prevBtn.disabled = false;
+    nextBtn.disabled = false;
+    if(DATA.first === true){
+        prevBtn.disabled = true;
+    }
+    if(DATA.last === true){
+        nextBtn.disabled = true;
+    }
+}
+
+prevBtn.addEventListener("click", async function(){
+    CURRENT_PAGE = CURRENT_PAGE - 1;
+    await getByParams(parseInt(minSlider.value), parseInt(maxSlider.value), (document.querySelector('[id^="rating-"][data-state="checked"]') ? document.querySelector('[id^="rating-"][data-state="checked"]').getAttribute("data-rating") : null), CURRENT_PAGE, CURRENT_SIZE);
+    sortProducts(sortSelector.value);
+    updatePagination();
+});
+
+nextBtn.addEventListener("click", async function(){
+    CURRENT_PAGE = CURRENT_PAGE + 1;
+    await getByParams(parseInt(minSlider.value), parseInt(maxSlider.value), (document.querySelector('[id^="rating-"][data-state="checked"]') ? document.querySelector('[id^="rating-"][data-state="checked"]').getAttribute("data-rating") : null), CURRENT_PAGE, CURRENT_SIZE);
+    sortProducts(sortSelector.value);
+    updatePagination();
+});

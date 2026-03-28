@@ -20,7 +20,7 @@ export async function getAll(page, size){
 }
 export async function getById(id){
     try {
-        const response = await fetch(`${url}/id/${id}`);
+        const response = await fetch(`${url}/products/id/${id}`);
         if (!response.ok) {
             const errorData = await response.json().catch(() => ({ message: response.statusText }));
             throw new Error("error");
@@ -33,7 +33,7 @@ export async function getById(id){
 }
 export async function getByCategory(category){
     try {
-        const response = await fetch(`${url}/category/${category}`);
+        const response = await fetch(`${url}/products/category/${category}`);
         if (!response.ok) {
             const errorData = await response.json().catch(() => ({ message: response.statusText }));
             throw new Error("error");

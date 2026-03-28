@@ -1,6 +1,6 @@
 import * as Data from "./data.js";
 import * as Utils from "./utils.js";
-
+import * as Api from "./../scripts_test/apiService.js";
 
 let currentIndex = 0;
 let galleryImages = [];
@@ -87,7 +87,7 @@ function initSpecsAccordion() {
     }
 }
 
-function renderProduct(product, allProducts) {
+async function renderProduct(product) {
     document.getElementById("product-name").textContent = product.name;
     document.getElementById("nav-name").textContent = product.name;
     document.getElementById("product-price").textContent = `$${product.price.toFixed(2)}`;
@@ -126,8 +126,8 @@ function renderProduct(product, allProducts) {
     relatedSection.style.display = "block";
     relatedContainer.innerHTML = "";
 
-    relatedIds.forEach(id => {
-        const related = allProducts.find(p => p.id === id);
+    for (const id of relatedIds) {
+        const related = await getById(id);
         if (!related) return;
 
         const card = document.createElement("a");
@@ -157,17 +157,13 @@ function renderProduct(product, allProducts) {
         `;
 
         relatedContainer.appendChild(card);
-    });
+    }
 }
 
 
 async function initProductPage() {
-    const products = await Data.loadProducts();
-    console.log(products);
     const id = Utils.getProductIdFromUrl();
-    console.log(id);
-    const product = products.find(p => p.id == id);
-    console.log(product);
+    const product = await getById(id);
     if (!product) {
         document.getElementById("product-page").innerHTML = `
             <div class="text-center">
@@ -179,7 +175,12 @@ async function initProductPage() {
         return;
     }
 
-    renderProduct(product, products);
+    await renderProduct(product);
 }
 
 initProductPage();
+
+async function getById(id){
+    const DATA = await Api.getById(id);
+    return DATA;
+}
