@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-commerce Website Design</title>
     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../styles_test/index.css">
 </head>
 <body>
 <div class="min-h-screen flex flex-col">
@@ -41,8 +42,8 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-5 "><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/>
                             <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/>
                         </svg>
-                        <span class="absolute flex items-center justify-center -top-1 -right-1 bg-[#F54900] text-white text-xs size-5 rounded-full">
-                    1
+                        <span id="cart-quantity-text" style="display: none" class="absolute flex items-center justify-center -top-1 -right-1 bg-[#F54900] text-white text-xs size-5 rounded-full">
+                    0
                     </span>
                     </a>
                     <button class="p-2 text-[#99A1AF] hover:text-[#F54900] transition-colors md:hidden">
@@ -120,18 +121,18 @@
                     <div class="text-black mb-6">
                         <label class="block text-sm font-semibold mb-2">Quantity</label>
                         <div class="flex items-center gap-3">
-                            <button id="reduce-quantity-button" class="w-10 h-10 border border-[#E5E7EB] rounded-lg hover:bg-[#f0f2f7] transition">-</button>
+                            <button id="reduce-quantity-button" class="change-quantity-button w-10 h-10 border border-[#E5E7EB] rounded-lg hover:bg-[#f0f2f7] transition">-</button>
                             <input id="quantity-input" type="number" min="1" class="w-20 h-10 text-center border border-[#E5E7EB] rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" value="1">
-                            <button id="add-quantity-button" class="w-10 h-10 border border-[#E5E7EB] rounded-lg hover:bg-[#f0f2f7] transition">+</button>
+                            <button id="add-quantity-button" class="change-quantity-button w-10 h-10 border border-[#E5E7EB] rounded-lg hover:bg-[#f0f2f7] transition">+</button>
                         </div>
                     </div>
-                    <button id="add-to-cart-button" class="flex items-center justify-center gap-2 mt-2 w-full py-4 text-sm font-semibold mb-4 text-white bg-[#F54900] hover:bg-[#b53600]  rounded-lg transition">
+                    <button id="add-to-cart-button" class="add-to-cart-button flex items-center justify-center gap-2 mt-2 w-full py-4 text-sm font-semibold mb-4 text-white bg-[#F54900] hover:bg-[#b53600]  rounded-lg transition">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-5 "><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/>
                             <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/>
                         </svg>
                         Add To Cart
                     </button>
-                    <button id="buy-now-button" class="flex items-center justify-center gap-2 mt-2 w-full py-4 text-sm font-semibold  text-[#F54900] bg-white border-2 border-[#F54900] hover:text-[#b53600] hover:border-[#b53600] rounded-lg transition">
+                    <button id="buy-now-button" class="add-to-cart-button flex items-center justify-center gap-2 mt-2 w-full py-4 text-sm font-semibold  text-[#F54900] bg-white border-2 border-[#F54900] hover:text-[#b53600] hover:border-[#b53600] rounded-lg transition">
                         Buy Now
                     </button>
                     <div class="mt-8">

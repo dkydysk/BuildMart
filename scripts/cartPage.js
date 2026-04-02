@@ -24,6 +24,7 @@ async function initCartPage(){
     await getCart(cartData);
     renderCartItems(DATA);
     updatePrices(DATA);
+    updateCartBadge();
 }
 
 function renderCartItems(cart) {
@@ -108,7 +109,9 @@ function calculateTotal(cart) {
 document.getElementById("promocode-button").addEventListener("click", async function() {
     const promocode = await getByCode(document.getElementById("promocode-input").value);
     if(!promocode){
-        return;
+        const promocodeTextInfo = document.getElementById("promocode-text-info");
+        promocodeTextInfo.textContent = "Something went wrong. Try again";
+
     }
     PROMOCODE = promocode;
     applyPromoCode();
@@ -129,6 +132,21 @@ function applyPromoCode(){
         <span class="price-value" id="price-value-discount"></span>
     `;
     cartPriceContainer.appendChild(discountDiv);
+}
+
+function updateCartBadge() {
+    const badge = document.getElementById("cart-quantity-text");
+    const cart = JSON.parse(localStorage.getItem("cart")) || {};
+    let totalQuantity = 0;
+    Object.values(cart).forEach(quantity => {
+        totalQuantity += quantity;
+    });
+    badge.textContent = totalQuantity;
+    if (totalQuantity === 0) {
+        badge.style.display = "none";
+    } else {
+        badge.style.display = "flex";
+    }
 }
 
 async function getByCode(code){

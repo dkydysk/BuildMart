@@ -91,3 +91,7 @@
 .add-to-cart-button{
     cursor: pointer;
 }
+
+.change-quantity-button{
+    cursor: pointer;
+}

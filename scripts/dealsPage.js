@@ -1,11 +1,10 @@
 import * as Data from "./data.js";
 import * as Utils from "./utils.js";
+import * as Api from "./../scripts_test/apiService.js";
 
-function renderDealsPage(products) {
+function renderDealsPage(deals) {
     const container = document.getElementById("deals-grid");
     if (!container) return;
-
-    const deals = products.filter(p => p.discount > 0);
 
     container.innerHTML = "";
 
@@ -17,14 +16,14 @@ function renderDealsPage(products) {
                 </div>
 
                 <div class="group bg-white border border-[#E5E7EB] rounded-lg overflow-hidden hover:shadow-lg transition">
-                    <a href="../pages/product.html?id=${product.id}">
+                    <a href="../product?id=${product.id}">
                         <div class="aspect-square overflow-hidden bg-gray-100">
                             <img src="${product.image}" class="w-full h-full object-cover group-hover:scale-105 transition">
                         </div>
                     </a>
 
                     <div class="p-4 flex flex-col gap-2">
-                        <a href="../pages/product.html?id=${product.id}">
+                        <a href="../product?id=${product.id}">
                             <h3 class="text-[#101828] font-semibold text-lg group-hover:text-[#F54900] transition">${product.name}</h3>
                         </a>
 
@@ -36,18 +35,60 @@ function renderDealsPage(products) {
                         <p class="text-2xl font-bold text-[#101828]">$${product.price.toFixed(2)}</p>
                         <p class="text-sm text-[#6A7282]">${product.category}</p>
 
-                        <button class="flex items-center justify-center gap-2 mt-2 w-full py-2 text-sm font-medium text-white bg-[#F54900] hover:bg-[#b53600] rounded-lg transition">
+                        <button data-id="${product.id}" class="add-to-cart-button flex items-center justify-center gap-2 mt-2 w-full py-2 text-sm font-medium text-white bg-[#F54900] hover:bg-[#b53600] rounded-lg transition">
                             Add To Cart
                         </button>
                     </div>
                 </div>
             </div>`;
     });
+    const buttons = container.querySelectorAll(".add-to-cart-button");
+    buttons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const productId = btn.getAttribute("data-id");
+            addToCart(productId);
+            updateCartBadge();
+        });
+    });
+}
+
+function addToCart(productId){
+    let cart = JSON.parse(localStorage.getItem("cart")) || {};
+    if (cart[productId]) {
+        cart[productId] = cart[productId] + 1;
+    }
+    else {
+        cart[productId] = 1;
+    }
+    localStorage.setItem("cart", JSON.stringify(cart));
+    alert("prikol");
+}
+
+function updateCartBadge() {
+    const badge = document.getElementById("cart-quantity-text");
+    const cart = JSON.parse(localStorage.getItem("cart")) || {};
+    let totalQuantity = 0;
+    Object.values(cart).forEach(quantity => {
+        totalQuantity += quantity;
+    });
+    badge.textContent = totalQuantity;
+    if (totalQuantity === 0) {
+        badge.style.display = "none";
+    } else {
+        badge.style.display = "flex";
+    }
 }
 
 async function initDealsPage() {
-    const products = await Data.loadProducts();
+    const products = await getByDiscount();
     renderDealsPage(products);
+    updateCartBadge();
+}
+
+async function getByDiscount(){
+    const DATA = await Api.getByDiscount();
+    return DATA;
 }
 
 initDealsPage();
+

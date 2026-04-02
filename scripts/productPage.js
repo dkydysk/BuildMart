@@ -174,8 +174,8 @@ async function initProductPage() {
             </div>`;
         return;
     }
-
     await renderProduct(product);
+    updateCartBadge();
 }
 
 initProductPage();
@@ -212,6 +212,7 @@ document.getElementById("add-to-cart-button").addEventListener("click", function
     const productId = urlParams.get('id');
     const quantity = parseInt(document.getElementById("quantity-input").value);
     addToCart(productId, quantity);
+    updateCartBadge();
 });
 
 document.getElementById("buy-now-button").addEventListener("click", function(){
@@ -219,4 +220,20 @@ document.getElementById("buy-now-button").addEventListener("click", function(){
     const productId = urlParams.get('id');
     const quantity = parseInt(document.getElementById("quantity-input").value);
     addToCart(productId, quantity);
+    window.location.href = "/cart";
 });
+
+function updateCartBadge() {
+    const badge = document.getElementById("cart-quantity-text");
+    const cart = JSON.parse(localStorage.getItem("cart")) || {};
+    let totalQuantity = 0;
+    Object.values(cart).forEach(quantity => {
+        totalQuantity += quantity;
+    });
+    badge.textContent = totalQuantity;
+    if (totalQuantity === 0) {
+        badge.style.display = "none";
+    } else {
+        badge.style.display = "flex";
+    }
+}

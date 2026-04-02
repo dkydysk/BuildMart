@@ -44,6 +44,19 @@ export async function getByCategory(category){
         throw new Error("error");
     }
 }
+export async function getByDiscount(){
+    try {
+        const response = await fetch(`${url}/products/discount`);
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => ({ message: response.statusText }));
+            throw new Error("error");
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('API Request Failed:', error);
+        throw new Error("error");
+    }
+}
 export async function getByParams(minPrice, maxPrice, rating, page, size){
     const params = new URLSearchParams();
     params.append("page", page);

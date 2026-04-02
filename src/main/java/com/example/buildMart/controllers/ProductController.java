@@ -19,8 +19,8 @@ public class ProductController {
     }
 
     @GetMapping("/")
-    public Page<Product> findAllByPage(/*@RequestParam String sort,*/ @RequestParam Integer page, @RequestParam Integer size){
-        return productService.findAllByPage(/*sort,*/ page, size);
+    public Page<Product> findAllByPage(@RequestParam Integer page, @RequestParam Integer size){
+        return productService.findAllByPage(page, size);
     }
 
     @GetMapping("/id/{id}")
@@ -31,6 +31,11 @@ public class ProductController {
     @GetMapping("/category/{category}")
     public List<Product> findAllByCategory(@PathVariable String category){
         return productService.findAllByCategory(category);
+    }
+
+    @GetMapping("/discount")
+    public List<Product> findByDiscount(){
+        return  productService.findByDiscount();
     }
 
     @GetMapping("/params")

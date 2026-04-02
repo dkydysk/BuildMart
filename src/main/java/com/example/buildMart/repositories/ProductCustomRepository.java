@@ -17,35 +17,24 @@ public class ProductCustomRepository {
     public ProductCustomRepository(MongoTemplate mongoTemplate){
         this.mongoTemplate = mongoTemplate;
     }
-    public Page<Product> findAllByPage(/*String sort,*/ Integer page, Integer size){
+    public Page<Product> findAllByPage(Integer page, Integer size){
         Query query = new Query();
         Query totalQuery = new Query();
         long total = mongoTemplate.count(totalQuery, Product.class);
         Pageable pageable = PageRequest.of(page, size);
         query.with(pageable);
-//        switch (sort) {
-//            case "name_asc":
-//                query.with(Sort.by(Sort.Direction.ASC, "name"));
-//                break;
-//            case "name_desc":
-//                query.with(Sort.by(Sort.Direction.DESC, "name"));
-//                break;
-//            case "price_asc":
-//                query.with(Sort.by(Sort.Direction.ASC, "price"));
-//                break;
-//            case "price_desc":
-//                query.with(Sort.by(Sort.Direction.DESC, "price"));
-//                break;
-//            default:
-//                break;
-//        }
         return new PageImpl<>(mongoTemplate.find(query, Product.class), pageable, total);
-    };
+    }
     public List<Product> findByCategory(String category){
         Query query = new Query();
         query.addCriteria(Criteria.where("category").is(category));
         return mongoTemplate.find(query, Product.class);
-    };
+    }
+    public List<Product> findByDiscount(){
+        Query query = new Query();
+        query.addCriteria(Criteria.where("discount").gt(0));
+        return mongoTemplate.find(query, Product.class);
+    }
     public Page<Product> findByParams(Float rating, Float minPrice, Float maxPrice, /*String sort,*/ Integer page, Integer size){
         Query query = new Query();
         Query totalQuery = new Query();
@@ -67,22 +56,6 @@ public class ProductCustomRepository {
         long total = mongoTemplate.count(totalQuery, Product.class);
         Pageable pageable = PageRequest.of(page, size);
         query.with(pageable);
-//        switch (sort) {
-//            case "name_asc":
-//                query.with(Sort.by(Sort.Direction.ASC, "name"));
-//                break;
-//            case "name_desc":
-//                query.with(Sort.by(Sort.Direction.DESC, "name"));
-//                break;
-//            case "price_asc":
-//                query.with(Sort.by(Sort.Direction.ASC, "price"));
-//                break;
-//            case "price_desc":
-//                query.with(Sort.by(Sort.Direction.DESC, "price"));
-//                break;
-//            default:
-//                break;
-//        }
         return new PageImpl<>(mongoTemplate.find(query, Product.class), pageable, total);
     }
 }

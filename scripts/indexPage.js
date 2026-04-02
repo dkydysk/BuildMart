@@ -59,6 +59,7 @@ function renderProductCards(products) {
         btn.addEventListener("click", () => {
             const productId = btn.getAttribute("data-id");
             addToCart(productId);
+            updateCartBadge();
         });
     });
 }
@@ -67,6 +68,7 @@ async function initCatalogPage() {
     await getAll(CURRENT_PAGE, CURRENT_SIZE);
     sortProducts(sortSelector.value);
     updatePagination();
+    updateCartBadge();
 }
 
 initCatalogPage();
@@ -256,4 +258,19 @@ function addToCart(productId){
     }
     localStorage.setItem("cart", JSON.stringify(cart));
     alert("prikol");
+}
+
+function updateCartBadge() {
+    const badge = document.getElementById("cart-quantity-text");
+    const cart = JSON.parse(localStorage.getItem("cart")) || {};
+    let totalQuantity = 0;
+    Object.values(cart).forEach(quantity => {
+        totalQuantity += quantity;
+    });
+    badge.textContent = totalQuantity;
+    if (totalQuantity === 0) {
+        badge.style.display = "none";
+    } else {
+        badge.style.display = "flex";
+    }
 }
