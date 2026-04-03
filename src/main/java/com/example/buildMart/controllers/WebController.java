@@ -19,4 +19,16 @@ public class WebController {
     public String cartPage() {
         return "forward:/pages/cart.html";
     }
+    @GetMapping("/about")
+    public String aboutPage() {
+        return "forward:/pages/about.html";
+    }
+    @GetMapping("/categories")
+    public String categoriesPage() {
+        return "forward:/pages/categories.html";
+    }
+    @GetMapping("/deals")
+    public String dealsPage() {
+        return "forward:/pages/deals.html";
+    }
 }

@@ -95,3 +95,11 @@
 .change-quantity-button{
     cursor: pointer;
 }
+
+#checkout-button{
+    cursor: pointer;
+}
+
+.delete-product-button{
+    cursor: pointer;
+}
