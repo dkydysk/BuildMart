@@ -2,6 +2,7 @@ import * as Data from "./data.js";
 import * as Utils from "./utils.js";
 import * as Api from "./../scripts_test/apiService.js";
 
+let CATEGORY = null;
 let DATA = null;
 let PRODUCTS = null;
 let CURRENT_SIZE = 4;
@@ -65,7 +66,14 @@ function renderProductCards(products) {
 }
 
 async function initCatalogPage() {
-    await getAll(CURRENT_PAGE, CURRENT_SIZE);
+    const urlParams = new URLSearchParams(window.location.search);
+    CATEGORY = urlParams.get('category');
+    if(CATEGORY){
+        console.log(CATEGORY);
+        await getByParams(null, null, null, CATEGORY, CURRENT_PAGE, CURRENT_SIZE);
+    } else {
+        await getAll(CURRENT_PAGE, CURRENT_SIZE);
+    }
     sortProducts(sortSelector.value);
     updatePagination();
     updateCartBadge();
@@ -85,7 +93,7 @@ buttons.forEach((btn) => {
             if (span) span.setAttribute("data-state", "unchecked");
         });
         if (isChecked){
-            await getByParams(parseInt(minSlider.value), parseInt(maxSlider.value), null, CURRENT_PAGE, CURRENT_SIZE);
+            await getByParams(parseInt(minSlider.value), parseInt(maxSlider.value), null, CATEGORY, CURRENT_PAGE, CURRENT_SIZE);
             sortProducts(sortSelector.value);
             updatePagination();
             return;
@@ -94,7 +102,7 @@ buttons.forEach((btn) => {
         btn.setAttribute("aria-checked", "true");
         const span = btn.querySelector("span[data-state]");
         if (span) span.setAttribute("data-state", "checked");
-        await getByParams(parseInt(minSlider.value), parseInt(maxSlider.value), btn.getAttribute("data-rating"), CURRENT_PAGE, CURRENT_SIZE);
+        await getByParams(parseInt(minSlider.value), parseInt(maxSlider.value), btn.getAttribute("data-rating"), CATEGORY, CURRENT_PAGE, CURRENT_SIZE);
         sortProducts(sortSelector.value);
         updatePagination();
     });
@@ -133,14 +141,14 @@ document.getElementById("clear_filters_button").addEventListener("click", functi
 
 minSlider.addEventListener('input', async function(e) {
     updateSlider(e);
-    await getByParams(parseInt(minSlider.value), parseInt(maxSlider.value), (document.querySelector('[id^="rating-"][data-state="checked"]') ? document.querySelector('[id^="rating-"][data-state="checked"]').getAttribute("data-rating") : null), CURRENT_PAGE, CURRENT_SIZE);
+    await getByParams(parseInt(minSlider.value), parseInt(maxSlider.value), (document.querySelector('[id^="rating-"][data-state="checked"]') ? document.querySelector('[id^="rating-"][data-state="checked"]').getAttribute("data-rating") : null), CATEGORY, CURRENT_PAGE, CURRENT_SIZE);
     sortProducts(sortSelector.value);
     updatePagination();
 });
 
 maxSlider.addEventListener('input', async function(e) {
     updateSlider(e);
-    await getByParams(parseInt(minSlider.value), parseInt(maxSlider.value), (document.querySelector('[id^="rating-"][data-state="checked"]') ? document.querySelector('[id^="rating-"][data-state="checked"]').getAttribute("data-rating") : null), CURRENT_PAGE, CURRENT_SIZE);
+    await getByParams(parseInt(minSlider.value), parseInt(maxSlider.value), (document.querySelector('[id^="rating-"][data-state="checked"]') ? document.querySelector('[id^="rating-"][data-state="checked"]').getAttribute("data-rating") : null), CATEGORY, CURRENT_PAGE, CURRENT_SIZE);
     sortProducts(sortSelector.value);
     updatePagination();
 });
@@ -190,8 +198,8 @@ sortSelector.addEventListener("change", function() {
     sortProducts(sortSelector.value);
 });
 
-async function getByParams(minPrice, maxPrice, rating, page, size){
-    DATA = await Api.getByParams(minPrice, maxPrice, rating, page, size);
+async function getByParams(minPrice, maxPrice, rating, category, page, size){
+    DATA = await Api.getByParams(minPrice, maxPrice, rating, category, page, size);
     console.log(DATA);
     PRODUCTS = DATA.content;
 }
@@ -236,14 +244,14 @@ function updatePagination(){
 
 prevBtn.addEventListener("click", async function(){
     CURRENT_PAGE = CURRENT_PAGE - 1;
-    await getByParams(parseInt(minSlider.value), parseInt(maxSlider.value), (document.querySelector('[id^="rating-"][data-state="checked"]') ? document.querySelector('[id^="rating-"][data-state="checked"]').getAttribute("data-rating") : null), CURRENT_PAGE, CURRENT_SIZE);
+    await getByParams(parseInt(minSlider.value), parseInt(maxSlider.value), (document.querySelector('[id^="rating-"][data-state="checked"]') ? document.querySelector('[id^="rating-"][data-state="checked"]').getAttribute("data-rating") : null), CATEGORY, CURRENT_PAGE, CURRENT_SIZE);
     sortProducts(sortSelector.value);
     updatePagination();
 });
 
 nextBtn.addEventListener("click", async function(){
     CURRENT_PAGE = CURRENT_PAGE + 1;
-    await getByParams(parseInt(minSlider.value), parseInt(maxSlider.value), (document.querySelector('[id^="rating-"][data-state="checked"]') ? document.querySelector('[id^="rating-"][data-state="checked"]').getAttribute("data-rating") : null), CURRENT_PAGE, CURRENT_SIZE);
+    await getByParams(parseInt(minSlider.value), parseInt(maxSlider.value), (document.querySelector('[id^="rating-"][data-state="checked"]') ? document.querySelector('[id^="rating-"][data-state="checked"]').getAttribute("data-rating") : null), CATEGORY, CURRENT_PAGE, CURRENT_SIZE);
     sortProducts(sortSelector.value);
     updatePagination();
 });

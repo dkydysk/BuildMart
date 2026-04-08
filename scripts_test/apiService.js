@@ -31,9 +31,9 @@ export async function getById(id){
         throw new Error("error");
     }
 }
-export async function getByCategory(category){
+export async function getAllCategories(){
     try {
-        const response = await fetch(`${url}/products/category/${category}`);
+        const response = await fetch(`${url}/products/categories`);
         if (!response.ok) {
             const errorData = await response.json().catch(() => ({ message: response.statusText }));
             throw new Error("error");
@@ -57,15 +57,24 @@ export async function getByDiscount(){
         throw new Error("error");
     }
 }
-export async function getByParams(minPrice, maxPrice, rating, page, size){
+export async function getByParams(minPrice, maxPrice, rating, category, page, size){
     const params = new URLSearchParams();
     params.append("page", page);
     params.append("size", size);
+    if(category !== null){
+        params.append("category", category);
+    }
     if(rating !== null){
         params.append("rating", rating);
     }
-    params.append("minPrice", minPrice);
-    params.append("maxPrice", maxPrice)
+    if(minPrice !== null || maxPrice !== null) {
+        if(minPrice !== null){
+            params.append("minPrice", minPrice);
+        }
+        if(maxPrice !== null){
+            params.append("maxPrice", maxPrice);
+        }
+    }
     try {
         const response = await fetch(`${url}/products/params?${params.toString()}`);
         if (!response.ok) {

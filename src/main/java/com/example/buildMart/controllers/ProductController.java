@@ -1,5 +1,7 @@
 package com.example.buildMart.controllers;
 
+import com.example.buildMart.models.Cart;
+import com.example.buildMart.models.Category;
 import com.example.buildMart.models.Product;
 import com.example.buildMart.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +30,9 @@ public class ProductController {
         return  productService.findById(id);
     }
 
-    @GetMapping("/category/{category}")
-    public List<Product> findAllByCategory(@PathVariable String category){
-        return productService.findAllByCategory(category);
+    @GetMapping("/categories")
+    public List<Category> findAllCategories(){
+        return productService.findAllCategories();
     }
 
     @GetMapping("/discount")
@@ -39,7 +41,7 @@ public class ProductController {
     }
 
     @GetMapping("/params")
-    public Page<Product> findAllByParams(@RequestParam(required = false) Float rating, @RequestParam Float minPrice, @RequestParam Float maxPrice, /*@RequestParam String sort,*/ @RequestParam Integer page, @RequestParam Integer size){
-        return productService.findAllByParams(rating, minPrice, maxPrice, /*sort,*/ page, size);
+    public Page<Product> findAllByParams(@RequestParam(required = false) Float rating, @RequestParam(required = false) Float minPrice, @RequestParam(required = false) Float maxPrice, @RequestParam(required = false) String category, @RequestParam Integer page, @RequestParam Integer size){
+        return productService.findAllByParams(rating, minPrice, maxPrice, category, page, size);
     }
 }

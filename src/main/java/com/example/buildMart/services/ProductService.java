@@ -1,5 +1,6 @@
 package com.example.buildMart.services;
 
+import com.example.buildMart.models.Category;
 import com.example.buildMart.models.Product;
 import com.example.buildMart.repositories.ProductCustomRepository;
 import com.example.buildMart.repositories.interfaces.ProductRepository;
@@ -27,13 +28,13 @@ public class ProductService {
     public Optional<Product> findById(String id){
         return productRepository.findById(id);
     }
-    public List<Product> findAllByCategory(String category){
-        return productCustomRepository.findByCategory(category);
+    public List<Category> findAllCategories(){
+        return productCustomRepository.findAllCategories();
     }
     public List<Product> findByDiscount(){
         return  productCustomRepository.findByDiscount();
     }
-    public Page<Product> findAllByParams(Float rating, Float minPrice, Float maxPrice,  /*String sort,*/ Integer page, Integer size){
-        return productCustomRepository.findByParams(rating, minPrice, maxPrice,  /*sort,*/ page, size);
+    public Page<Product> findAllByParams(Float rating, Float minPrice, Float maxPrice,  String category, Integer page, Integer size){
+        return productCustomRepository.findByParams(rating, minPrice, maxPrice,  category, page, size);
     }
 }
