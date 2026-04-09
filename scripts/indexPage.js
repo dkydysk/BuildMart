@@ -46,7 +46,7 @@ function renderProductCards(products) {
                     </div>
                     <p class="text-2xl font-bold text-[#101828]">$${product.price.toFixed(2)}</p>
                     <p class="text-sm text-[#6A7282]">${product.category}</p>
-                    <button data-id="${product.id}" class="add-to-cart-button flex items-center justify-center gap-2 mt-2 w-full py-2 text-sm font-medium text-white bg-[#F54900] hover:bg-[#b53600]  rounded-lg transition">
+                    <button data-id="${product.id}" data-name="${product.name}" class="add-to-cart-button flex items-center justify-center gap-2 mt-2 w-full py-2 text-sm font-medium text-white bg-[#F54900] hover:bg-[#b53600]  rounded-lg transition">
                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4 "><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/>
                              <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/>
                        </svg>
@@ -59,7 +59,9 @@ function renderProductCards(products) {
     buttons.forEach(btn => {
         btn.addEventListener("click", () => {
             const productId = btn.getAttribute("data-id");
+            const productName = btn.getAttribute("data-name");
             addToCart(productId);
+            showNotification("Added: "+productName);
             updateCartBadge();
         });
     });
@@ -67,7 +69,7 @@ function renderProductCards(products) {
 
 async function initCatalogPage() {
     const urlParams = new URLSearchParams(window.location.search);
-    CATEGORY = urlParams.get('category');
+    CATEGORY = urlParams.get("category");
     if(CATEGORY){
         console.log(CATEGORY);
         await getByParams(null, null, null, CATEGORY, CURRENT_PAGE, CURRENT_SIZE);
@@ -115,11 +117,11 @@ const shownProducts = document.getElementById("shown-products");
 const prevBtn = document.getElementById("prev-page");
 const nextBtn = document.getElementById("next-page");
 
-const minSlider = document.getElementById('min-price');
-const maxSlider = document.getElementById('max-price');
-const sliderRange = document.getElementById('slider-range');
-const minValueText = document.getElementById('min-value');
-const maxValueText = document.getElementById('max-value');
+const minSlider = document.getElementById("min-price");
+const maxSlider = document.getElementById("max-price");
+const sliderRange = document.getElementById("slider-range");
+const minValueText = document.getElementById("min-value");
+const maxValueText = document.getElementById("max-value");
 const minValue = 0;
 const maxValue = 400;
 
@@ -139,14 +141,14 @@ document.getElementById("clear_filters_button").addEventListener("click", functi
     clearFilters();
 });
 
-minSlider.addEventListener('input', async function(e) {
+minSlider.addEventListener("input", async function(e) {
     updateSlider(e);
     await getByParams(parseInt(minSlider.value), parseInt(maxSlider.value), (document.querySelector('[id^="rating-"][data-state="checked"]') ? document.querySelector('[id^="rating-"][data-state="checked"]').getAttribute("data-rating") : null), CATEGORY, CURRENT_PAGE, CURRENT_SIZE);
     sortProducts(sortSelector.value);
     updatePagination();
 });
 
-maxSlider.addEventListener('input', async function(e) {
+maxSlider.addEventListener("input", async function(e) {
     updateSlider(e);
     await getByParams(parseInt(minSlider.value), parseInt(maxSlider.value), (document.querySelector('[id^="rating-"][data-state="checked"]') ? document.querySelector('[id^="rating-"][data-state="checked"]').getAttribute("data-rating") : null), CATEGORY, CURRENT_PAGE, CURRENT_SIZE);
     sortProducts(sortSelector.value);
@@ -169,10 +171,10 @@ function updateSlider(e) {
         }
     }
 
-    minValueText.textContent = '$' + minVal;
-    maxValueText.textContent = '$' + maxVal;
-    sliderRange.style.left = (minVal / maxValue) * 100 + '%';
-    sliderRange.style.right = (100 - (maxVal / maxValue) * 100) + '%';
+    minValueText.textContent = "$" + minVal;
+    maxValueText.textContent = "$" + maxVal;
+    sliderRange.style.left = (minVal / maxValue) * 100 + "%";
+    sliderRange.style.right = (100 - (maxVal / maxValue) * 100) + "%";
 }
 
 function clearFilters(){
@@ -180,16 +182,16 @@ function clearFilters(){
     if(activeSelected){
         activeSelected.setAttribute("data-state", "unchecked");
         activeSelected.setAttribute("aria-checked", "false");
-        const activeSelectedSpan = activeSelected.querySelector('span');
+        const activeSelectedSpan = activeSelected.querySelector("span");
         activeSelectedSpan.setAttribute("data-state", "unchecked");
     }
 
     minSlider.value = minValue;
     maxSlider.value = maxValue;
-    minValueText.textContent = '$' + minValue;
-    maxValueText.textContent = '$' + maxValue;
-    sliderRange.style.left = 0 + '%';
-    sliderRange.style.right = 0 + '%';
+    minValueText.textContent = "$" + minValue;
+    maxValueText.textContent = "$" + maxValue;
+    sliderRange.style.left = 0 + "%";
+    sliderRange.style.right = 0 + "%";
 
     initCatalogPage();
 }
@@ -265,7 +267,6 @@ function addToCart(productId){
         cart[productId] = 1;
     }
     localStorage.setItem("cart", JSON.stringify(cart));
-    alert("prikol");
 }
 
 function updateCartBadge() {
@@ -281,4 +282,21 @@ function updateCartBadge() {
     } else {
         badge.style.display = "flex";
     }
+}
+
+function showNotification(message) {
+    const container = document.getElementById("notification-container");
+    const notification = document.createElement("div");
+    notification.className = "my-notification";
+    notification.innerHTML = `
+        <svg class="notification-success-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+        </svg>
+        <div class="notification-message">${message}</div>
+    `;
+    container.appendChild(notification);
+    setTimeout(() => {
+        notification.classList.add("notification-fade-out");
+        notification.addEventListener("animationend", () => notification.remove());
+    }, 3000);
 }

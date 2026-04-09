@@ -46,11 +46,11 @@ function renderCartItems(cart) {
                     </div>
                     <div class="md:col-span-2 flex justify-start md:justify-center">
                         <div class="flex items-center gap-2 border border-gray-300 rounded-lg">
-                            <button data-id="${product.id}" class="change-quantity-button reduce-quantity-button w-8 h-8 flex items-center justify-center hover:bg-gray-50 transition">
+                            <button data-id="${product.id}" data-name="${product.name}" class="change-quantity-button reduce-quantity-button w-8 h-8 flex items-center justify-center hover:bg-gray-50 transition">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4"><path d="M5 12h14"></path></svg>
                             </button>
                             <span class="product-quantity text-black w-12 text-center font-semibold">${quantity}</span>
-                            <button data-id="${product.id}" class="change-quantity-button add-quantity-button w-8 h-8 flex items-center justify-center hover:bg-gray-50 transition">
+                            <button data-id="${product.id}" data-name="${product.name}" class="change-quantity-button add-quantity-button w-8 h-8 flex items-center justify-center hover:bg-gray-50 transition">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
                             </button>
                         </div>
@@ -58,7 +58,7 @@ function renderCartItems(cart) {
                     <div class="md:col-span-2 flex justify-between md:justify-end items-center">
                         <span class="md:hidden text-sm text-[#4A5565]">Total: </span>
                         <span class="text-black font-bold text-lg">$${itemTotal.toFixed(2)}</span>
-                        <button data-id="${product.id}" class="delete-product-button hidden md:block ml-4 text-red-700 hover:text-red-800 transition">
+                        <button data-id="${product.id}" data-name="${product.name}" class="delete-product-button hidden md:block ml-4 text-red-700 hover:text-red-800 transition">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-5"><path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path><line x1="10" x2="10" y1="11" y2="17"></line><line x1="14" x2="14" y1="11" y2="17"></line></svg>
                         </button>
                     </div>
@@ -69,7 +69,9 @@ function renderCartItems(cart) {
     addToCartButtons.forEach(btn => {
         btn.addEventListener("click", () => {
             const productId = btn.getAttribute("data-id");
+            const productName = btn.getAttribute("data-name");
             addToCart(productId);
+            showNotification("Added " + productName + " to cart");
             renderCartItems(DATA);
             updatePrices(DATA);
         });
@@ -233,3 +235,20 @@ async function getCart(data){
 }
 
 initCartPage();
+
+function showNotification(message) {
+    const container = document.getElementById("notification-container");
+    const notification = document.createElement("div");
+    notification.className = "my-notification";
+    notification.innerHTML = `
+        <svg class="notification-success-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+        </svg>
+        <div class="notification-message">${message}</div>
+    `;
+    container.appendChild(notification);
+    setTimeout(() => {
+        notification.classList.add("notification-fade-out");
+        notification.addEventListener("animationend", () => notification.remove());
+    }, 3000);
+}

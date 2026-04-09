@@ -35,7 +35,7 @@ function renderDealsPage(deals) {
                         <p class="text-2xl font-bold text-[#101828]">$${product.price.toFixed(2)}</p>
                         <p class="text-sm text-[#6A7282]">${product.category}</p>
 
-                        <button data-id="${product.id}" class="add-to-cart-button flex items-center justify-center gap-2 mt-2 w-full py-2 text-sm font-medium text-white bg-[#F54900] hover:bg-[#b53600] rounded-lg transition">
+                        <button data-id="${product.id}" data-name="${product.name}" class="add-to-cart-button flex items-center justify-center gap-2 mt-2 w-full py-2 text-sm font-medium text-white bg-[#F54900] hover:bg-[#b53600] rounded-lg transition">
                             Add To Cart
                         </button>
                     </div>
@@ -46,7 +46,9 @@ function renderDealsPage(deals) {
     buttons.forEach(btn => {
         btn.addEventListener("click", () => {
             const productId = btn.getAttribute("data-id");
+            const productName = btn.getAttribute("data-name");
             addToCart(productId);
+            showNotification("Added " + productName + " to cart");
             updateCartBadge();
         });
     });
@@ -61,7 +63,6 @@ function addToCart(productId){
         cart[productId] = 1;
     }
     localStorage.setItem("cart", JSON.stringify(cart));
-    alert("prikol");
 }
 
 function updateCartBadge() {
@@ -92,3 +93,19 @@ async function getByDiscount(){
 
 initDealsPage();
 
+function showNotification(message) {
+    const container = document.getElementById("notification-container");
+    const notification = document.createElement("div");
+    notification.className = "my-notification";
+    notification.innerHTML = `
+        <svg class="notification-success-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+        </svg>
+        <div class="notification-message">${message}</div>
+    `;
+    container.appendChild(notification);
+    setTimeout(() => {
+        notification.classList.add("notification-fade-out");
+        notification.addEventListener("animationend", () => notification.remove());
+    }, 3000);
+}
