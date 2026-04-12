@@ -131,19 +131,19 @@ async function renderProduct(product) {
         if (!related) return;
 
         const card = document.createElement("a");
-        card.href = `../product?id=${related.id}`;
+        card.href = `../product.html?id=${related.id}`;
         card.className = "group bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition block";
 
         card.innerHTML = `
              <div class="group bg-white border border-[#E5E7EB] rounded-lg overflow-hidden hover:shadow-lg transition">
-                    <a href="../product?id=${related.id}">
+                    <a href="product.html?id=${related.id}">
                         <div class="aspect-square overflow-hidden bg-gray-100">
                             <img src="${related.image}" class="w-full h-full object-cover group-hover:scale-105 transition">
                         </div>
                     </a>
 
                     <div class="p-4 flex flex-col gap-2">
-                        <a href="../product?id=${related.id}">
+                        <a href="product.html?id=${related.id}">
                             <h3 class="text-[#101828] font-semibold text-lg group-hover:text-[#F54900] transition">${related.name}</h3>
                         </a>
 
@@ -168,7 +168,7 @@ async function initProductPage() {
         document.getElementById("product-page").innerHTML = `
             <div class="text-center">
                 <h1 class="mb-4">Product Not Found</h1>
-                <a class="text-[#F54900] hover:text-[#b53600]" href=".." data-discover="true">
+                <a class="text-[#F54900] hover:text-[#b53600]" href="index.html" data-discover="true">
                     Return to Catalog
                 </a>
             </div>`;

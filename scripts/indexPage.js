@@ -31,13 +31,13 @@ function renderProductCards(products) {
     products.forEach(product => {
         container.innerHTML += `
             <div class="group bg-white border border-[#E5E7EB] rounded-lg overflow-hidden hover:shadow-lg transition">
-                <a href="../product?id=${product.id}">
+                <a href="product.html?id=${product.id}">
                     <div class="aspect-square overflow-hidden bg-gray-100">
                         <img src="${product.image}" class="w-full h-full object-cover group-hover:scale-105 transition">
                     </div>
                 </a>
                 <div class="p-4 flex flex-col gap-2">
-                    <a href="../product?id=${product.id}">
+                    <a href="product.html?id=${product.id}">
                         <h3 class="text-[#101828] font-semibold text-lg group-hover:text-[#F54900] transition">${product.name}</h3>
                     </a>
                     <div class="flex items-center gap-0.5">

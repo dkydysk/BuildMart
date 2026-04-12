@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class WebController {
 
-    @GetMapping("/product")
+    @GetMapping("/product.html")
     public String productPage(@RequestParam String id) {
         return "forward:/pages/product.html";
     }
@@ -15,19 +15,19 @@ public class WebController {
     public String indexPage() {
         return "forward:/pages/index.html";
     }
-    @GetMapping("/cart")
+    @GetMapping("/cart.html")
     public String cartPage() {
         return "forward:/pages/cart.html";
     }
-    @GetMapping("/about")
+    @GetMapping("/about.html")
     public String aboutPage() {
         return "forward:/pages/about.html";
     }
-    @GetMapping("/categories")
+    @GetMapping("/categories.html")
     public String categoriesPage() {
         return "forward:/pages/categories.html";
     }
-    @GetMapping("/deals")
+    @GetMapping("/deals.html")
     public String dealsPage() {
         return "forward:/pages/deals.html";
     }

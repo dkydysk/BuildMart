@@ -26,11 +26,11 @@ function renderCartItems(cart) {
             <div class="p-4 md:p-6" data-id="${product.id}">
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
                     <div class="md:col-span-6 flex gap-4">
-                        <a class="flex-shrink-0" href="../product?id=${product.id}">
+                        <a class="flex-shrink-0" href="product.html?id=${product.id}">
                             <img src="${product.image}" alt="${product.name}" class="w-20 h-20 md:w-24 md:h-24 object-cover rounded-lg">
                         </a>
                         <div class="flex-1">
-                            <a class="font-semibold text-[#101828] hover:text-[#F54900] transition" href="../product?id=${product.id}">
+                            <a class="font-semibold text-[#101828] hover:text-[#F54900] transition" href="product.html?id=${product.id}">
                                 ${product.name}
                             </a>
                             <p class="text-sm text-[#4A5565] mt-1">${product.category}</p>
@@ -139,7 +139,7 @@ function checkIfCartNull(cartData){
         container.innerHTML = `<div class="text-center">
             <h1 class="text-3xl text-black font-bold mb-4">Your Cart is Empty</h1>
             <p class="mb-8">Start shopping to add items to your cart</p>
-            <a class="inline-flex items-center gap-2 px-8 py-3 font-medium bg-[#F54900] text-white  hover:bg-[#b53600]  rounded-lg transition" href="..">
+            <a class="inline-flex items-center gap-2 px-8 py-3 font-medium bg-[#F54900] text-white  hover:bg-[#b53600]  rounded-lg transition" href="index.html">
                 Browse Products
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white size-5">
                     <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
