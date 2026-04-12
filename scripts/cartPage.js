@@ -1,4 +1,4 @@
-import * as Api from "./../scripts_test/apiService.js";
+import * as Api from "./apiService.js";
 
 let PROMOCODE = null;
 const TAX = 8;
