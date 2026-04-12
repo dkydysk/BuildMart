@@ -131,7 +131,7 @@ async function renderProduct(product) {
         if (!related) return;
 
         const card = document.createElement("a");
-        card.href = `../product.html?id=${related.id}`;
+        card.href = `product.html?id=${related.id}`;
         card.className = "group bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition block";
 
         card.innerHTML = `
@@ -223,7 +223,7 @@ document.getElementById("buy-now-button").addEventListener("click", function(){
     const productName = document.getElementById("product-name").textContent;
     addToCart(productId, quantity);
     showNotification("Added " + productName + " to cart");
-    window.location.href = "/cart";
+    window.location.href = "/cart.html";
 });
 
 function updateCartBadge() {

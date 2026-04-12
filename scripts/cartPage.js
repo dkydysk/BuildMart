@@ -191,7 +191,7 @@ document.getElementById("promocode-button").addEventListener("click", async func
 
 document.getElementById("checkout-button").addEventListener("click", async function() {
     localStorage.removeItem("cart");
-    window.location.href = "/";
+    window.location.href = "/index.html";
 });
 
 function applyPromoCode(){
