@@ -9,7 +9,7 @@ function renderCategoriesPage(products) {
 
     products.forEach(product => {
         container.innerHTML += `
-            <a href="index.html/?category=${encodeURIComponent(product.name)}"
+            <a href="./?category=${encodeURIComponent(product.name)}"
                class="group relative rounded-lg aspect-video overflow-hidden border border-[#E5E7EB] hover:shadow-lg transition-shadow">
                 <img src="${product.image}" class="w-full h-full object-cover group-hover:scale-105 transition">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-6">
