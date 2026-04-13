@@ -1,5 +1,5 @@
 import * as Data from "./data.js";
-import * as Api from "./apiService.js";
+import * as Api from "./testService.js";
 
 function renderCategoriesPage(products) {
     const container = document.getElementById("categories-grid");

@@ -1,6 +1,6 @@
 import * as Data from "./data.js";
 import * as Utils from "./utils.js";
-import * as Api from "./apiService.js";
+import * as Api from "./testService.js";
 
 let CATEGORY = null;
 let DATA = null;
