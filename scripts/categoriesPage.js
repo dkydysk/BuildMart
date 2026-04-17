@@ -22,12 +22,6 @@ function renderCategoriesPage(products) {
     });
 }
 
-async function initCategoriesPage() {
-    const products = await getAllCategories();
-    renderCategoriesPage(products);
-    updateCartBadge();
-}
-
 function updateCartBadge() {
     const badge = document.getElementById("cart-quantity-text");
     const cart = JSON.parse(localStorage.getItem("cart")) || {};
@@ -43,9 +37,15 @@ function updateCartBadge() {
     }
 }
 
-initCategoriesPage();
-
 async function getAllCategories(id){
     const DATA = await Api.getAllCategories();
     return DATA;
 }
+
+async function initCategoriesPage() {
+    const products = await getAllCategories();
+    renderCategoriesPage(products);
+    updateCartBadge();
+}
+
+initCategoriesPage();

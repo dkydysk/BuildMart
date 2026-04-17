@@ -48,21 +48,10 @@ function renderDealsPage(deals) {
             const productId = btn.getAttribute("data-id");
             const productName = btn.getAttribute("data-name");
             addToCart(productId);
-            showNotification("Added " + productName + " to cart");
+            Utils.showNotification("Added " + productName + " to cart");
             updateCartBadge();
         });
     });
-}
-
-function addToCart(productId){
-    let cart = JSON.parse(localStorage.getItem("cart")) || {};
-    if (cart[productId]) {
-        cart[productId] = cart[productId] + 1;
-    }
-    else {
-        cart[productId] = 1;
-    }
-    localStorage.setItem("cart", JSON.stringify(cart));
 }
 
 function updateCartBadge() {
@@ -80,10 +69,15 @@ function updateCartBadge() {
     }
 }
 
-async function initDealsPage() {
-    const products = await getByDiscount();
-    renderDealsPage(products);
-    updateCartBadge();
+function addToCart(productId){
+    let cart = JSON.parse(localStorage.getItem("cart")) || {};
+    if (cart[productId]) {
+        cart[productId] = cart[productId] + 1;
+    }
+    else {
+        cart[productId] = 1;
+    }
+    localStorage.setItem("cart", JSON.stringify(cart));
 }
 
 async function getByDiscount(){
@@ -91,21 +85,10 @@ async function getByDiscount(){
     return DATA;
 }
 
-initDealsPage();
-
-function showNotification(message) {
-    const container = document.getElementById("notification-container");
-    const notification = document.createElement("div");
-    notification.className = "my-notification";
-    notification.innerHTML = `
-        <svg class="notification-success-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
-        </svg>
-        <div class="notification-message">${message}</div>
-    `;
-    container.appendChild(notification);
-    setTimeout(() => {
-        notification.classList.add("notification-fade-out");
-        notification.addEventListener("animationend", () => notification.remove());
-    }, 3000);
+async function initDealsPage() {
+    const products = await getByDiscount();
+    renderDealsPage(products);
+    updateCartBadge();
 }
+
+initDealsPage();

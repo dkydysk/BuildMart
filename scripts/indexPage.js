@@ -8,6 +8,22 @@ let PRODUCTS = null;
 let CURRENT_SIZE = 4;
 let CURRENT_PAGE = 0;
 
+const sortSelector = document.getElementById("sort-selector");
+const shownProducts = document.getElementById("shown-products");
+
+const prevBtn = document.getElementById("prev-page");
+const nextBtn = document.getElementById("next-page");
+
+const minSlider = document.getElementById("min-price");
+const maxSlider = document.getElementById("max-price");
+const sliderRange = document.getElementById("slider-range");
+const minValueText = document.getElementById("min-value");
+const maxValueText = document.getElementById("max-value");
+const minValue = 0;
+const maxValue = 400;
+
+const buttons = document.querySelectorAll("#rating-container [data-rating]");
+
 function renderProductCards(products) {
     const container = document.getElementById("products-grid");
     if (!container) return;
@@ -61,29 +77,11 @@ function renderProductCards(products) {
             const productId = btn.getAttribute("data-id");
             const productName = btn.getAttribute("data-name");
             addToCart(productId);
-            showNotification("Added: "+productName);
+            Utils.showNotification("Added: "+productName);
             updateCartBadge();
         });
     });
 }
-
-async function initCatalogPage() {
-    const urlParams = new URLSearchParams(window.location.search);
-    CATEGORY = urlParams.get("category");
-    if(CATEGORY){
-        console.log(CATEGORY);
-        await getByParams(null, null, null, CATEGORY, CURRENT_PAGE, CURRENT_SIZE);
-    } else {
-        await getAll(CURRENT_PAGE, CURRENT_SIZE);
-    }
-    sortProducts(sortSelector.value);
-    updatePagination();
-    updateCartBadge();
-}
-
-initCatalogPage();
-
-const buttons = document.querySelectorAll("#rating-container [data-rating]");
 
 buttons.forEach((btn) => {
     btn.addEventListener("click", async function() {
@@ -109,21 +107,6 @@ buttons.forEach((btn) => {
         updatePagination();
     });
 });
-
-/* ---- filters ---- */
-const sortSelector = document.getElementById("sort-selector");
-const shownProducts = document.getElementById("shown-products");
-
-const prevBtn = document.getElementById("prev-page");
-const nextBtn = document.getElementById("next-page");
-
-const minSlider = document.getElementById("min-price");
-const maxSlider = document.getElementById("max-price");
-const sliderRange = document.getElementById("slider-range");
-const minValueText = document.getElementById("min-value");
-const maxValueText = document.getElementById("max-value");
-const minValue = 0;
-const maxValue = 400;
 
 document.getElementById("filters_button").addEventListener("click", function() {
     const filters_div = document.getElementById("filters_div");
@@ -200,17 +183,6 @@ sortSelector.addEventListener("change", function() {
     sortProducts(sortSelector.value);
 });
 
-async function getByParams(minPrice, maxPrice, rating, category, page, size){
-    DATA = await Api.getByParams(minPrice, maxPrice, rating, category, page, size);
-    console.log(DATA);
-    PRODUCTS = DATA.content;
-}
-
-async function getAll(page, size){
-    DATA = await Api.getAll(page, size);
-    PRODUCTS = DATA.content;
-}
-
 function sortProducts(sortValue){
     switch(sortValue){
         case "name_asc":
@@ -232,6 +204,7 @@ function sortProducts(sortValue){
 }
 
 function updatePagination(){
+    console.log(DATA);
     const pageInfo = document.getElementById("page-info");
     pageInfo.textContent = "Page " + (CURRENT_PAGE + 1);
     prevBtn.disabled = false;
@@ -284,19 +257,29 @@ function updateCartBadge() {
     }
 }
 
-function showNotification(message) {
-    const container = document.getElementById("notification-container");
-    const notification = document.createElement("div");
-    notification.className = "my-notification";
-    notification.innerHTML = `
-        <svg class="notification-success-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
-        </svg>
-        <div class="notification-message">${message}</div>
-    `;
-    container.appendChild(notification);
-    setTimeout(() => {
-        notification.classList.add("notification-fade-out");
-        notification.addEventListener("animationend", () => notification.remove());
-    }, 3000);
+async function getByParams(minPrice, maxPrice, rating, category, page, size){
+    DATA = await Api.getByParams(minPrice, maxPrice, rating, category, page, size);
+    console.log(DATA);
+    PRODUCTS = DATA.content;
 }
+
+async function getAll(page, size){
+    DATA = await Api.getAll(page, size);
+    PRODUCTS = DATA.content;
+}
+
+async function initCatalogPage() {
+    const urlParams = new URLSearchParams(window.location.search);
+    CATEGORY = urlParams.get("category");
+    if(CATEGORY){
+        console.log(CATEGORY);
+        await getByParams(null, null, null, CATEGORY, CURRENT_PAGE, CURRENT_SIZE);
+    } else {
+        await getAll(CURRENT_PAGE, CURRENT_SIZE);
+    }
+    sortProducts(sortSelector.value);
+    updatePagination();
+    updateCartBadge();
+}
+
+initCatalogPage();

@@ -1,18 +1,9 @@
 import * as Api from "./testService.js";
+import * as Utils from "./utils.js";
 
 let PROMOCODE = null;
 const TAX = 8;
 let DATA = null;
-
-async function initCartPage(){
-    const cartData = checkIfCartNull(JSON.parse(localStorage.getItem("cart")) || {});
-    if(cartData){
-        await getCart(cartData);
-        renderCartItems(DATA);
-        updatePrices(DATA);
-        updateCartBadge();
-    }
-}
 
 function renderCartItems(cart) {
     const container = document.getElementById("cart-products");
@@ -71,7 +62,7 @@ function renderCartItems(cart) {
             const productId = btn.getAttribute("data-id");
             const productName = btn.getAttribute("data-name");
             addToCart(productId);
-            showNotification("Added " + productName + " to cart");
+            Utils.showNotification("Added " + productName + " to cart");
             renderCartItems(DATA);
             updatePrices(DATA);
         });
@@ -104,35 +95,6 @@ function renderCartItems(cart) {
     });
 }
 
-function addToCart(productId){
-    let cart = JSON.parse(localStorage.getItem("cart")) || {};
-    DATA.productQuantity[productId] += 1;
-    cart[productId] = DATA.productQuantity[productId];
-    localStorage.setItem("cart", JSON.stringify(cart));
-}
-
-function reduceToCart(productId){
-    let cart = JSON.parse(localStorage.getItem("cart")) || {};
-    DATA.productQuantity[productId] -= 1;
-    cart[productId] = DATA.productQuantity[productId];
-    if (DATA.productQuantity[productId] <= 0) {
-        delete DATA.productQuantity[productId];
-        delete cart[productId];
-        DATA.products = DATA.products.filter(product => (product.id !== productId));
-    }
-    localStorage.setItem("cart", JSON.stringify(cart));
-    alert("prikol");
-}
-
-function deleteFromCart(productId){
-    let cart = JSON.parse(localStorage.getItem("cart")) || {};
-    delete DATA.productQuantity[productId];
-    delete cart[productId];
-    DATA.products = DATA.products.filter(product => (product.id !== productId));
-    localStorage.setItem("cart", JSON.stringify(cart));
-    alert("prikol");
-}
-
 function checkIfCartNull(cartData){
     const container = document.getElementById("cart-main-container");
     if (Object.keys(cartData).length === 0) {
@@ -149,6 +111,21 @@ function checkIfCartNull(cartData){
         return null;
     }
     return cartData;
+}
+
+function updateCartBadge() {
+    const badge = document.getElementById("cart-quantity-text");
+    const cart = JSON.parse(localStorage.getItem("cart")) || {};
+    let totalQuantity = 0;
+    Object.values(cart).forEach(quantity => {
+        totalQuantity += quantity;
+    });
+    badge.textContent = totalQuantity;
+    if (totalQuantity === 0) {
+        badge.style.display = "none";
+    } else {
+        badge.style.display = "flex";
+    }
 }
 
 function updatePrices(cart){
@@ -177,22 +154,32 @@ function calculateTotal(cart) {
     return total;
 }
 
-document.getElementById("promocode-button").addEventListener("click", async function() {
-    const promocode = await getByCode(document.getElementById("promocode-input").value);
-    if(!promocode){
-        const promocodeTextInfo = document.getElementById("promocode-text-info");
-        promocodeTextInfo.textContent = "Something went wrong. Try again";
+function addToCart(productId){
+    let cart = JSON.parse(localStorage.getItem("cart")) || {};
+    DATA.productQuantity[productId] += 1;
+    cart[productId] = DATA.productQuantity[productId];
+    localStorage.setItem("cart", JSON.stringify(cart));
+}
 
+function reduceToCart(productId){
+    let cart = JSON.parse(localStorage.getItem("cart")) || {};
+    DATA.productQuantity[productId] -= 1;
+    cart[productId] = DATA.productQuantity[productId];
+    if (DATA.productQuantity[productId] <= 0) {
+        delete DATA.productQuantity[productId];
+        delete cart[productId];
+        DATA.products = DATA.products.filter(product => (product.id !== productId));
     }
-    PROMOCODE = promocode;
-    applyPromoCode();
-    updatePrices(DATA);
-});
+    localStorage.setItem("cart", JSON.stringify(cart));
+}
 
-document.getElementById("checkout-button").addEventListener("click", async function() {
-    localStorage.removeItem("cart");
-    window.location.href = "/index.html";
-});
+function deleteFromCart(productId){
+    let cart = JSON.parse(localStorage.getItem("cart")) || {};
+    delete DATA.productQuantity[productId];
+    delete cart[productId];
+    DATA.products = DATA.products.filter(product => (product.id !== productId));
+    localStorage.setItem("cart", JSON.stringify(cart));
+}
 
 function applyPromoCode(){
     const promocodeTextInfo = document.getElementById("promocode-text-info");
@@ -210,20 +197,22 @@ function applyPromoCode(){
     cartPriceContainer.appendChild(discountDiv);
 }
 
-function updateCartBadge() {
-    const badge = document.getElementById("cart-quantity-text");
-    const cart = JSON.parse(localStorage.getItem("cart")) || {};
-    let totalQuantity = 0;
-    Object.values(cart).forEach(quantity => {
-        totalQuantity += quantity;
-    });
-    badge.textContent = totalQuantity;
-    if (totalQuantity === 0) {
-        badge.style.display = "none";
-    } else {
-        badge.style.display = "flex";
+document.getElementById("promocode-button").addEventListener("click", async function() {
+    const promocode = await getByCode(document.getElementById("promocode-input").value);
+    if(!promocode){
+        const promocodeTextInfo = document.getElementById("promocode-text-info");
+        promocodeTextInfo.textContent = "Something went wrong. Try again";
+
     }
-}
+    PROMOCODE = promocode;
+    applyPromoCode();
+    updatePrices(DATA);
+});
+
+document.getElementById("checkout-button").addEventListener("click", async function() {
+    localStorage.removeItem("cart");
+    window.location.href = "/index.html";
+});
 
 async function getByCode(code){
     const data = await Api.getByCode(code);
@@ -234,21 +223,14 @@ async function getCart(data){
     DATA = await Api.getCart(data);
 }
 
-initCartPage();
-
-function showNotification(message) {
-    const container = document.getElementById("notification-container");
-    const notification = document.createElement("div");
-    notification.className = "my-notification";
-    notification.innerHTML = `
-        <svg class="notification-success-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
-        </svg>
-        <div class="notification-message">${message}</div>
-    `;
-    container.appendChild(notification);
-    setTimeout(() => {
-        notification.classList.add("notification-fade-out");
-        notification.addEventListener("animationend", () => notification.remove());
-    }, 3000);
+async function initCartPage(){
+    const cartData = checkIfCartNull(JSON.parse(localStorage.getItem("cart")) || {});
+    if(cartData){
+        await getCart(cartData);
+        renderCartItems(DATA);
+        updatePrices(DATA);
+        updateCartBadge();
+    }
 }
+
+initCartPage();
