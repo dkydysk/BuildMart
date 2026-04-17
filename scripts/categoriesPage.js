@@ -1,5 +1,5 @@
 import * as Data from "./data.js";
-import * as Api from "./apiService.js";
+import * as Api from "./testService.js";
 
 function renderCategoriesPage(products) {
     const container = document.getElementById("categories-grid");
@@ -22,12 +22,6 @@ function renderCategoriesPage(products) {
     });
 }
 
-async function initCategoriesPage() {
-    const products = await getAllCategories();
-    renderCategoriesPage(products);
-    updateCartBadge();
-}
-
 function updateCartBadge() {
     const badge = document.getElementById("cart-quantity-text");
     const cart = JSON.parse(localStorage.getItem("cart")) || {};
@@ -43,9 +37,15 @@ function updateCartBadge() {
     }
 }
 
-initCategoriesPage();
-
 async function getAllCategories(id){
     const DATA = await Api.getAllCategories();
     return DATA;
 }
+
+async function initCategoriesPage() {
+    const products = await getAllCategories();
+    renderCategoriesPage(products);
+    updateCartBadge();
+}
+
+initCategoriesPage();
