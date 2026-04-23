@@ -1,6 +1,6 @@
 import * as Data from "./data.js";
 import * as Utils from "./utils.js";
-import * as Api from "./testService.js";
+import * as Api from "./apiService.js";
 
 let CATEGORY = null;
 let DATA = null;
@@ -93,8 +93,9 @@ buttons.forEach((btn) => {
             if (span) span.setAttribute("data-state", "unchecked");
         });
         if (isChecked){
-            await getByParams(parseInt(minSlider.value), parseInt(maxSlider.value), null, CATEGORY, CURRENT_PAGE, CURRENT_SIZE);
-            sortProducts(sortSelector.value);
+            resetPagination();
+            await getByParams(parseInt(minSlider.value), parseInt(maxSlider.value), null, CATEGORY, CURRENT_PAGE, CURRENT_SIZE, sortSelector.value);
+            renderProductCards(PRODUCTS);
             updatePagination();
             return;
         }
@@ -102,8 +103,9 @@ buttons.forEach((btn) => {
         btn.setAttribute("aria-checked", "true");
         const span = btn.querySelector("span[data-state]");
         if (span) span.setAttribute("data-state", "checked");
-        await getByParams(parseInt(minSlider.value), parseInt(maxSlider.value), btn.getAttribute("data-rating"), CATEGORY, CURRENT_PAGE, CURRENT_SIZE);
-        sortProducts(sortSelector.value);
+        resetPagination();
+        await getByParams(parseInt(minSlider.value), parseInt(maxSlider.value), btn.getAttribute("data-rating"), CATEGORY, CURRENT_PAGE, CURRENT_SIZE, sortSelector.value);
+        renderProductCards(PRODUCTS);
         updatePagination();
     });
 });
@@ -126,15 +128,17 @@ document.getElementById("clear_filters_button").addEventListener("click", functi
 
 minSlider.addEventListener("input", async function(e) {
     updateSlider(e);
-    await getByParams(parseInt(minSlider.value), parseInt(maxSlider.value), (document.querySelector('[id^="rating-"][data-state="checked"]') ? document.querySelector('[id^="rating-"][data-state="checked"]').getAttribute("data-rating") : null), CATEGORY, CURRENT_PAGE, CURRENT_SIZE);
-    sortProducts(sortSelector.value);
+    resetPagination();
+    await getByParams(parseInt(minSlider.value), parseInt(maxSlider.value), (document.querySelector('[id^="rating-"][data-state="checked"]') ? document.querySelector('[id^="rating-"][data-state="checked"]').getAttribute("data-rating") : null), CATEGORY, CURRENT_PAGE, CURRENT_SIZE, sortSelector.value);
+    renderProductCards(PRODUCTS);
     updatePagination();
 });
 
 maxSlider.addEventListener("input", async function(e) {
     updateSlider(e);
-    await getByParams(parseInt(minSlider.value), parseInt(maxSlider.value), (document.querySelector('[id^="rating-"][data-state="checked"]') ? document.querySelector('[id^="rating-"][data-state="checked"]').getAttribute("data-rating") : null), CATEGORY, CURRENT_PAGE, CURRENT_SIZE);
-    sortProducts(sortSelector.value);
+    resetPagination();
+    await getByParams(parseInt(minSlider.value), parseInt(maxSlider.value), (document.querySelector('[id^="rating-"][data-state="checked"]') ? document.querySelector('[id^="rating-"][data-state="checked"]').getAttribute("data-rating") : null), CATEGORY, CURRENT_PAGE, CURRENT_SIZE, sortSelector.value);
+    renderProductCards(PRODUCTS);
     updatePagination();
 });
 
@@ -179,32 +183,12 @@ function clearFilters(){
     initCatalogPage();
 }
 
-sortSelector.addEventListener("change", function() {
-    sortProducts(sortSelector.value);
+sortSelector.addEventListener("change", async function() {
+    await getByParams(parseInt(minSlider.value), parseInt(maxSlider.value), (document.querySelector('[id^="rating-"][data-state="checked"]') ? document.querySelector('[id^="rating-"][data-state="checked"]').getAttribute("data-rating") : null), CATEGORY, CURRENT_PAGE, CURRENT_SIZE, sortSelector.value);
+    renderProductCards(PRODUCTS);
 });
 
-function sortProducts(sortValue){
-    switch(sortValue){
-        case "name_asc":
-            PRODUCTS.sort((a,b) => a.name.localeCompare(b.name));
-            break;
-        case "name_desc":
-            PRODUCTS.sort((a,b) => b.name.localeCompare(a.name));
-            break;
-        case "price_asc":
-            PRODUCTS.sort((a,b) => a.price - b.price);
-            break;
-        case "price_desc":
-            PRODUCTS.sort((a,b) => b.price - a.price);
-            break;
-        default:
-            break;
-    }
-    renderProductCards(PRODUCTS);
-}
-
 function updatePagination(){
-    console.log(DATA);
     const pageInfo = document.getElementById("page-info");
     pageInfo.textContent = "Page " + (CURRENT_PAGE + 1);
     prevBtn.disabled = false;
@@ -217,17 +201,21 @@ function updatePagination(){
     }
 }
 
+function resetPagination(){
+    CURRENT_PAGE = 0;
+}
+
 prevBtn.addEventListener("click", async function(){
     CURRENT_PAGE = CURRENT_PAGE - 1;
-    await getByParams(parseInt(minSlider.value), parseInt(maxSlider.value), (document.querySelector('[id^="rating-"][data-state="checked"]') ? document.querySelector('[id^="rating-"][data-state="checked"]').getAttribute("data-rating") : null), CATEGORY, CURRENT_PAGE, CURRENT_SIZE);
-    sortProducts(sortSelector.value);
+    await getByParams(parseInt(minSlider.value), parseInt(maxSlider.value), (document.querySelector('[id^="rating-"][data-state="checked"]') ? document.querySelector('[id^="rating-"][data-state="checked"]').getAttribute("data-rating") : null), CATEGORY, CURRENT_PAGE, CURRENT_SIZE, sortSelector.value);
+    renderProductCards(PRODUCTS);
     updatePagination();
 });
 
 nextBtn.addEventListener("click", async function(){
     CURRENT_PAGE = CURRENT_PAGE + 1;
-    await getByParams(parseInt(minSlider.value), parseInt(maxSlider.value), (document.querySelector('[id^="rating-"][data-state="checked"]') ? document.querySelector('[id^="rating-"][data-state="checked"]').getAttribute("data-rating") : null), CATEGORY, CURRENT_PAGE, CURRENT_SIZE);
-    sortProducts(sortSelector.value);
+    await getByParams(parseInt(minSlider.value), parseInt(maxSlider.value), (document.querySelector('[id^="rating-"][data-state="checked"]') ? document.querySelector('[id^="rating-"][data-state="checked"]').getAttribute("data-rating") : null), CATEGORY, CURRENT_PAGE, CURRENT_SIZE, sortSelector.value);
+    renderProductCards(PRODUCTS);
     updatePagination();
 });
 
@@ -257,14 +245,14 @@ function updateCartBadge() {
     }
 }
 
-async function getByParams(minPrice, maxPrice, rating, category, page, size){
-    DATA = await Api.getByParams(minPrice, maxPrice, rating, category, page, size);
+async function getByParams(minPrice, maxPrice, rating, category, page, size, sort){
+    DATA = await Api.getByParams(minPrice, maxPrice, rating, category, page, size, sort);
     console.log(DATA);
     PRODUCTS = DATA.content;
 }
 
-async function getAll(page, size){
-    DATA = await Api.getAll(page, size);
+async function getAll(page, size, sort){
+    DATA = await Api.getAll(page, size, sort);
     PRODUCTS = DATA.content;
 }
 
@@ -273,11 +261,11 @@ async function initCatalogPage() {
     CATEGORY = urlParams.get("category");
     if(CATEGORY){
         console.log(CATEGORY);
-        await getByParams(null, null, null, CATEGORY, CURRENT_PAGE, CURRENT_SIZE);
+        await getByParams(null, null, null, CATEGORY, CURRENT_PAGE, CURRENT_SIZE, sortSelector.value);
     } else {
-        await getAll(CURRENT_PAGE, CURRENT_SIZE);
+        await getAll(CURRENT_PAGE, CURRENT_SIZE, sortSelector.value);
     }
-    sortProducts(sortSelector.value);
+    renderProductCards(PRODUCTS);
     updatePagination();
     updateCartBadge();
     Utils.initMobileHeader();
