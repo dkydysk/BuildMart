@@ -1,4 +1,4 @@
-import * as Api from "./testService.js";
+import * as Api from "./apiService.js";
 import * as Utils from "./utils.js";
 
 let PROMOCODE = null;
@@ -137,11 +137,11 @@ function updatePrices(cart){
     document.getElementById("price-value-tax").textContent = `$${priceValueTax.toFixed(2)}`;
     total += priceValueTax;
     if(PROMOCODE){
-        const priceValueDiscount = priceValueTotal*PROMOCODE.value/100;
+        const priceValueDiscount = total*PROMOCODE.value/100;
         document.getElementById("price-value-discount").textContent = `-$${priceValueDiscount.toFixed(2)}`;
         total -= priceValueDiscount;
     }
-    const cartPriceTotal = document.getElementById("cart-price-total").textContent = `${total.toFixed(2)}`;
+    const cartPriceTotal = document.getElementById("cart-price-total").textContent = `$${total.toFixed(2)}`;
 }
 
 function calculateTotal(cart) {

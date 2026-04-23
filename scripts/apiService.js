@@ -1,10 +1,13 @@
 export const url = "http://localhost:8080";
 
-export async function getAll(page, size){
+export async function getAll(page, size, sort){
     const params = new URLSearchParams();
     if(page !== null || size !== null){
         params.append("page", page);
         params.append("size", size);
+    }
+    if(sort !== null){
+        params.append("sort", sort);
     }
     try {
         const response = await fetch(`${url}/products/?${params.toString()}`);
@@ -57,10 +60,15 @@ export async function getByDiscount(){
         throw new Error("error");
     }
 }
-export async function getByParams(minPrice, maxPrice, rating, category, page, size){
+export async function getByParams(minPrice, maxPrice, rating, category, page, size, sort){
     const params = new URLSearchParams();
-    params.append("page", page);
-    params.append("size", size);
+    if(page !== null || size !== null){
+        params.append("page", page);
+        params.append("size", size);
+    }
+    if(sort !== null){
+        params.append("sort", sort);
+    }
     if(category !== null){
         params.append("category", category);
     }

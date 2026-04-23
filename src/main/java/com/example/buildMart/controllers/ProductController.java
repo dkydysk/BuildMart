@@ -21,8 +21,8 @@ public class ProductController {
     }
 
     @GetMapping("/")
-    public Page<Product> findAllByPage(@RequestParam Integer page, @RequestParam Integer size){
-        return productService.findAllByPage(page, size);
+    public Page<Product> findAllByPage(@RequestParam Integer page, @RequestParam Integer size, @RequestParam String sort){
+        return productService.findAllByPage(page, size, sort);
     }
 
     @GetMapping("/id/{id}")
@@ -41,7 +41,7 @@ public class ProductController {
     }
 
     @GetMapping("/params")
-    public Page<Product> findAllByParams(@RequestParam(required = false) Float rating, @RequestParam(required = false) Float minPrice, @RequestParam(required = false) Float maxPrice, @RequestParam(required = false) String category, @RequestParam Integer page, @RequestParam Integer size){
-        return productService.findAllByParams(rating, minPrice, maxPrice, category, page, size);
+    public Page<Product> findAllByParams(@RequestParam(required = false) Float rating, @RequestParam(required = false) Float minPrice, @RequestParam(required = false) Float maxPrice, @RequestParam(required = false) String category, @RequestParam Integer page, @RequestParam Integer size, @RequestParam String sort){
+        return productService.findAllByParams(rating, minPrice, maxPrice, category, page, size, sort);
     }
 }

@@ -22,8 +22,8 @@ public class ProductService {
         this.productRepository = productRepository;
         this.productCustomRepository = productCustomRepository;
     }
-    public Page<Product> findAllByPage(Integer page, Integer size){
-        return productCustomRepository.findAllByPage(page, size);
+    public Page<Product> findAllByPage(Integer page, Integer size, String sort){
+        return productCustomRepository.findAllByPage(page, size, sort);
     }
     public Optional<Product> findById(String id){
         return productRepository.findById(id);
@@ -34,7 +34,7 @@ public class ProductService {
     public List<Product> findByDiscount(){
         return  productCustomRepository.findByDiscount();
     }
-    public Page<Product> findAllByParams(Float rating, Float minPrice, Float maxPrice,  String category, Integer page, Integer size){
-        return productCustomRepository.findByParams(rating, minPrice, maxPrice,  category, page, size);
+    public Page<Product> findAllByParams(Float rating, Float minPrice, Float maxPrice,  String category, Integer page, Integer size, String sort){
+        return productCustomRepository.findByParams(rating, minPrice, maxPrice,  category, page, size, sort);
     }
 }
