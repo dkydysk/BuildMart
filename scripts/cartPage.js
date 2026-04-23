@@ -231,6 +231,7 @@ async function initCartPage(){
         updatePrices(DATA);
         updateCartBadge();
     }
+    Utils.initMobileHeader();
 }
 
 initCartPage();
