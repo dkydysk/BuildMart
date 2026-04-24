@@ -247,7 +247,6 @@ function updateCartBadge() {
 
 async function getByParams(minPrice, maxPrice, rating, category, page, size, sort){
     DATA = await Api.getByParams(minPrice, maxPrice, rating, category, page, size, sort);
-    console.log(DATA);
     PRODUCTS = DATA.content;
 }
 
@@ -260,7 +259,6 @@ async function initCatalogPage() {
     const urlParams = new URLSearchParams(window.location.search);
     CATEGORY = urlParams.get("category");
     if(CATEGORY){
-        console.log(CATEGORY);
         await getByParams(null, null, null, CATEGORY, CURRENT_PAGE, CURRENT_SIZE, sortSelector.value);
     } else {
         await getAll(CURRENT_PAGE, CURRENT_SIZE, sortSelector.value);
