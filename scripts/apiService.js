@@ -1,4 +1,4 @@
-export const url = "buildmartfork-production.up.railway.app";
+export const url = "https://buildmartfork-production.up.railway.app";
 
 export async function getAll(page, size, sort){
     const params = new URLSearchParams();
