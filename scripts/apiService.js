@@ -1,4 +1,4 @@
-export const url = "http://localhost:8080";
+export const url = "buildmartfork-production.up.railway.app";
 
 export async function getAll(page, size, sort){
     const params = new URLSearchParams();
